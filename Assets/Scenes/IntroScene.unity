@@ -17858,6 +17858,7 @@ GameObject:
   - component: {fileID: 1590554120}
   - component: {fileID: 1590554122}
   - component: {fileID: 1590554121}
+  - component: {fileID: 1590554123}
   m_Layer: 0
   m_Name: INTROTEXT
   m_TagString: Untagged
@@ -17904,7 +17905,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: what is this dream
+  m_text: what is this dream...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04478082f1bbc3c4098224189cbb767f, type: 2}
   m_sharedMaterial: {fileID: -7662303817158342908, guid: 04478082f1bbc3c4098224189cbb767f, type: 2}
@@ -17983,6 +17984,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590554119}
   m_CullTransparentMesh: 1
+--- !u!114 &1590554123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590554119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e929200f472874c44b74ba0a4e8b451f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmpText: {fileID: 1590554121}
+  delay: 0.05
+  popScale: 2
+  popUpDuration: 0.07
+  popDownDuration: 0.15
+  popUpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  popDownCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1599186018
 GameObject:
   m_ObjectHideFlags: 0
