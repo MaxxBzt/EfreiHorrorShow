@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class CinematiqueSequence : MonoBehaviour
 {
+    public GameObject blinkEffect;  
+    
     void Start()
     {
         blinkEffect.SetActive(false);
