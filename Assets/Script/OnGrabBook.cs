@@ -30,6 +30,7 @@ public class OneGrabBook : MonoBehaviour
             grabbable.WhenPointerEventRaised -= OnPointerEvent;
     }
 
+    //Fonction pour ouvrir et fermer le livre
     private void OnPointerEvent(PointerEvent evt)
     {
         if (evt.Type == PointerEventType.Select)
