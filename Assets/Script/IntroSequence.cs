@@ -21,6 +21,7 @@ public class IntroSequenceVR : MonoBehaviour
         blinkEffect.SetActive(false);
 
         introText.SetActive(true);
-        yield return new WaitForSeconds(20f); 
+        yield return new WaitForSeconds(10f); 
+        introText.SetActive(false);
     }
 }
