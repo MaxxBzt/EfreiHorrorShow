@@ -1698,6 +1698,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188678701}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &190310376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 190310377}
+  m_Layer: 0
+  m_Name: Cam Humanoid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &190310377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190310376}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 1.9799999, y: 0.158, z: 5.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &197117822
 GameObject:
   m_ObjectHideFlags: 0
@@ -4727,7 +4758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 687733296}
   m_Layer: 0
-  m_Name: transform
+  m_Name: Cam 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6554,7 +6585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 890558015}
   m_Layer: 0
-  m_Name: Initial Transform
+  m_Name: Cam 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8062,11 +8093,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2000267365}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8299999
+      value: 0.83000004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
       propertyPath: m_LocalScale.y
@@ -8074,19 +8105,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.8299999
+      value: 0.83000004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.201347
+      value: 1.4881102
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.90619713
+      value: 0.029999852
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.23191929
+      value: 3.0074396
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11046,11 +11077,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!4 &1313556461 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
-  m_PrefabInstance: {fileID: 1118828118}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1316211952
 GameObject:
   m_ObjectHideFlags: 0
@@ -11670,6 +11696,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1392026790}
   - component: {fileID: 1392026789}
+  - component: {fileID: 1392026792}
+  - component: {fileID: 1392026791}
   m_Layer: 0
   m_Name: Timeline
   m_TagString: Untagged
@@ -11704,10 +11732,10 @@ PlayableDirector:
     value: {fileID: 2000267364}
   - key: {fileID: -2507545153133782410, guid: 633e16660da0f42e7bb309b43d1304b9, type: 2}
     value: {fileID: 1389530819}
-  - key: {fileID: -6937392919339596944, guid: 633e16660da0f42e7bb309b43d1304b9, type: 2}
-    value: {fileID: 1808077460}
   - key: {fileID: 4702708713255914302, guid: 633e16660da0f42e7bb309b43d1304b9, type: 2}
     value: {fileID: 1808077461}
+  - key: {fileID: 7651751876102041977, guid: 633e16660da0f42e7bb309b43d1304b9, type: 2}
+    value: {fileID: 1313556458}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1392026790
@@ -11725,6 +11753,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1392026791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392026788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 48effd144917a408fa76d69588b94643, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1392026792}
+          m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+          m_MethodName: LoadScene
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: "Se\u0301quence1"
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1392026792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392026788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bed7c29bfa3e4c8abf544a90fa8408f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1396680747
 GameObject:
   m_ObjectHideFlags: 0
@@ -14940,7 +15010,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1808077459}
   - component: {fileID: 1808077462}
-  - component: {fileID: 1808077463}
   - component: {fileID: 1808077458}
   - component: {fileID: 1808077457}
   - component: {fileID: 1808077456}
@@ -15147,16 +15216,17 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: 31a3d946bea284e339021c4300279e4a, type: 2}
     - {fileID: 11400000, guid: ecd9de8f8c9a1497ba2b6ed2f2b810f9, type: 2}
+    - {fileID: 11400000, guid: fa1eca737dc5647b69580fab53cdbdf6, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1808077462}
           m_TargetAssemblyTypeName: TeleportRig, Assembly-CSharp
-          m_MethodName: Teleport
-          m_Mode: 1
+          m_MethodName: TeleportTo
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 687733296}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -15164,13 +15234,27 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1808077463}
-          m_TargetAssemblyTypeName: TeleportBack, Assembly-CSharp
-          m_MethodName: TeleportAgain
-          m_Mode: 1
+        - m_Target: {fileID: 1808077462}
+          m_TargetAssemblyTypeName: TeleportRig, Assembly-CSharp
+          m_MethodName: TeleportTo
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 890558015}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1808077462}
+          m_TargetAssemblyTypeName: TeleportRig, Assembly-CSharp
+          m_MethodName: TeleportTo
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 190310377}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -15188,20 +15272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a43f629ebf884ef190f238fbf2d561d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {fileID: 687733296}
---- !u!114 &1808077463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808077454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f6de5c5b4514b79baa597ff6f83b51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPosition: {fileID: 890558015}
 --- !u!1 &1811144710
 GameObject:
   m_ObjectHideFlags: 0
@@ -16387,7 +16457,6 @@ Transform:
   - {fileID: 1922925485}
   - {fileID: 1595271044}
   - {fileID: 1050305104}
-  - {fileID: 1313556461}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002075062
@@ -17650,3 +17719,5 @@ SceneRoots:
   - {fileID: 2000267365}
   - {fileID: 687733296}
   - {fileID: 890558015}
+  - {fileID: 1118828118}
+  - {fileID: 190310377}

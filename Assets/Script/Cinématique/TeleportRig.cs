@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class TeleportRig : MonoBehaviour
 {
-    public Transform targetPosition;
-
-    public void Teleport()
+    public void TeleportTo(Transform targetPosition)
     {
         if (targetPosition != null)
         {
