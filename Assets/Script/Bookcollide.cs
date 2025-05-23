@@ -91,13 +91,13 @@ public class PlaySoundOnCollision : MonoBehaviour
 
     IEnumerator PlayVoiceAndSpawn()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         voice.Play();
 
-        yield return new WaitForSeconds(voice.clip.length);
+        yield return new WaitForSeconds(2f);
 
         Vector3 origin = transform.position;
-        SpawnLetter.Spawn(origin); // 🔁 Un seul spawn
+        SpawnLetter.Spawn(origin); 
     }
 
 

@@ -712,6 +712,7 @@ MonoBehaviour:
   collisionAudioSource: {fileID: 8255049208535011985}
   voice: {fileID: 2290534355936171617}
   grabbable: {fileID: 6473121543381182150}
+  letterPrefab: {fileID: 6419731931019685561, guid: b7215aece4236fa4492f2ef333aff372, type: 3}
 --- !u!1 &6025146569514053284 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7036213049465896255, guid: 0203e49c7e4a2164f85bd62dcc44b0a9, type: 3}
