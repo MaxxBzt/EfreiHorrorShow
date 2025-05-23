@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: 7ac0d1a9-9d7c-46f9-832a-7ad92191e2ab
+  instanceId: 50d5a6a3-98af-43bc-a527-07b41fbe195e
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -879,6 +879,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9080913249728749659, guid: 1574264154a1d224c95f6b390196dd39, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: ec2a13decebbbff45ba7474e105559dc, type: 3}
+    - target: {fileID: 9080913249728749659, guid: 1574264154a1d224c95f6b390196dd39, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ec2a13decebbbff45ba7474e105559dc, type: 3}
     - target: {fileID: 9080913249728749659, guid: 1574264154a1d224c95f6b390196dd39, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0

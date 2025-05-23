@@ -62,7 +62,7 @@ public class PlaySoundOnCollision : MonoBehaviour
             float timeSinceCollision = Time.time - collisionTime;
             Debug.Log("Held Duration: " + heldDuration);
 
-            if (collisionCount >= 1 && heldDuration >= 10f && voice != null)
+            if (collisionCount >= 1 && heldDuration >= 5f && voice != null)
             {
                 StartCoroutine(PlayVoiceAndSpawn());  // fait parler la voix du père pour continuer l'histoire
             }
@@ -94,7 +94,7 @@ public class PlaySoundOnCollision : MonoBehaviour
         yield return new WaitForSeconds(1f);
         voice.Play();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         Vector3 origin = transform.position;
         SpawnLetter.Spawn(origin); 
