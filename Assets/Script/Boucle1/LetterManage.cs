@@ -13,6 +13,7 @@ public class LetterManage : MonoBehaviour
     private bool isGrabbed = false;
 
     public GameObject Keys;
+    public bool keysCalled = false;
 
     void Awake()
     {
@@ -57,6 +58,7 @@ public class LetterManage : MonoBehaviour
 
             if (collisionCount >= 1 && heldDuration >= 2f)
             {
+                keysCalled = true;
                 StartCoroutine(SpawnKeysCoroutine(50, 2f, 5f));
 
             }

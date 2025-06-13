@@ -154,6 +154,7 @@ MonoBehaviour:
   grabbable: {fileID: 1128910799419061187}
   collisionAudioSource: {fileID: 633367637867666887}
   Keys: {fileID: 2418377490682575963, guid: da73e83cf1bb66e499eb927e4e2a0805, type: 3}
+  RealKeys: {fileID: 7060994181748257740, guid: b265451225b66ef4184a4484bf3cad3f, type: 3}
 --- !u!82 &633367637867666887
 AudioSource:
   m_ObjectHideFlags: 0
