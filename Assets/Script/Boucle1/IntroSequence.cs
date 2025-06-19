@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using TMPro; // Nécessaire pour TMP_Text
+using TMPro;
+using Unity.VisualScripting; // Nécessaire pour TMP_Text
 
 public class IntroSequenceVR : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class IntroSequenceVR : MonoBehaviour
     [Header("Spawn d'objet")]
     public GameObject prefabToSpawn;
     public Transform cameraRig;
-    public float forwardDistance = 1.5f;
+    public float forwardDistance = 1f;
     public float heightAboveGround = 5f;
-    public float spawnRadius = 1f;
+    public float spawnRadius = .5f;
 
     void Start()
     {
@@ -26,7 +27,20 @@ public class IntroSequenceVR : MonoBehaviour
     IEnumerator PlayIntro()
     {
         blinkEffect.SetActive(true);
-        yield return new WaitForSeconds(4f);
+
+        Material mat = blinkEffect.GetComponent<MeshRenderer>().material;
+
+        float duration = 6f;
+        float t = 0f;
+
+        while (t < duration)
+        {
+            mat.SetFloat("_time", t+1);
+            t += Time.deltaTime;
+            yield return null;
+            mat.SetFloat("_width", Mathf.Lerp(.5f,.8f,t/duration));
+        }
+
         blinkEffect.SetActive(false);
 
         introText.SetActive(true);
@@ -53,7 +67,7 @@ public class IntroSequenceVR : MonoBehaviour
             -cameraRig.right
         };
 
-        LayerMask environmentMask = 1 << 6; // Layer 6 = Environnement
+        LayerMask environmentMask = 1<<6;// Layer 6 = Environnement
         float maxRaycastDistance = 10f;
         int maxAttempts = 15;
         float verticalOffset = 0.05f;
@@ -66,12 +80,16 @@ public class IntroSequenceVR : MonoBehaviour
             Vector2 randCircle = Random.insideUnitCircle * spawnRadius;
             Vector3 offset = new Vector3(randCircle.x, 0, randCircle.y);
 
-            Vector3 rayOrigin = basePos + offset + Vector3.up * heightAboveGround;
 
-            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, maxRaycastDistance, environmentMask))
+            Vector3 rayOrigin = basePos + offset + Vector3.up * heightAboveGround;
+            Debug.DrawRay(rayOrigin, Vector3.down * maxRaycastDistance, Color.red, 2f);
+
+            Debug.Log($"{attempt} : {cameraRig.position} : {rayOrigin}");
+
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit))
             {
                 string lowerName = hit.collider.gameObject.name.ToLower();
-
+                Debug.Log("touché");
                 // ✅ Vérifie que c’est bien du sol ou une table
                 if (lowerName.Contains("floor") || lowerName.Contains("table"))
                 {
@@ -80,6 +98,7 @@ public class IntroSequenceVR : MonoBehaviour
                     return;
                 }
             }
+
         }
 
         Debug.LogWarning("Aucune surface sol/table trouvée pour spawner l'objet.");

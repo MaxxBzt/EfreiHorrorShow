@@ -3,7 +3,32 @@ guid: 0203e49c7e4a2164f85bd62dcc44b0a9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cover
+    second: {fileID: 2100000, guid: 46a63fcd1e256b74a8c0e187b78aa4fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: edge
+    second: {fileID: 2100000, guid: d658ae97ea6846a4da4e4956855d6a23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pageL
+    second: {fileID: 2100000, guid: b2cc7f6f7214f414499d75ed3b522b60, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pageM
+    second: {fileID: 2100000, guid: 27e38ac70664aff468379a8de5f2e733, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pageR
+    second: {fileID: 2100000, guid: b708e789a4d040844ad24f7891acedf0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
