@@ -13,7 +13,10 @@ public class LetterManage : MonoBehaviour
     private bool isGrabbed = false;
 
     public GameObject Keys;
+    public GameObject RealKeys;
     public bool keysCalled = false;
+    public AudioSource Dong;
+    public bool dongplayed = false;
 
     void Awake()
     {
@@ -31,39 +34,48 @@ public class LetterManage : MonoBehaviour
     void Start()
     {
         SpawnKeys.prefab = Keys;
+        SpawnRealkey.prefab = RealKeys;
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (grabbable == null) return;
+      if (grabbable == null) return;
 
-        // Start grab
-        if (!isGrabbed && grabbable.SelectingPointsCount > 0)
+    // Joue le son Dong une fois si collisionCount > 2
+    if (collisionCount > 2 && !dongplayed && Dong != null)
+    {
+        Dong.Play();
+        dongplayed = true;
+    }
+
+    // Start grab
+    if (!isGrabbed && grabbable.SelectingPointsCount > 0)
+    {
+        isGrabbed = true;
+        grabStartTime = Time.time;
+    }
+    Debug.Log(collisionCount);
+
+    // Release grab
+    // ... Dans Update()
+
+    if (isGrabbed && grabbable.SelectingPointsCount == 0)
+    {
+        isGrabbed = false;
+
+        float heldDuration = Time.time - grabStartTime;
+        float timeSinceCollision = Time.time - collisionTime;
+        Debug.Log("Held Duration: " + heldDuration);
+
+        // Ajoute la condition !keysCalled
+        if (!keysCalled && collisionCount >= 1 && heldDuration >= 2f)
         {
-            isGrabbed = true;
-            grabStartTime = Time.time;
+            keysCalled = true;
+            StartCoroutine(SpawnKeysCoroutine(50, 2f, 5f));
         }
-        Debug.Log(collisionCount);
+    }
 
-        // Release grab
-        if (isGrabbed && grabbable.SelectingPointsCount == 0)
-        {
-            isGrabbed = false;
-
-
-            float heldDuration = Time.time - grabStartTime;
-            float timeSinceCollision = Time.time - collisionTime;
-            Debug.Log("Held Duration: " + heldDuration);
-
-            if (collisionCount >= 1 && heldDuration >= 2f)
-            {
-                keysCalled = true;
-                StartCoroutine(SpawnKeysCoroutine(50, 2f, 5f));
-
-            }
-
-        } 
     }
 
      IEnumerator SpawnKeysCoroutine(int count, float radius = 1f, float minHeight = 5f, float maxHeight = 7f)
@@ -74,8 +86,23 @@ public class LetterManage : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             SpawnKeys.SpawnAbovePlayer(center, 1, radius, minHeight, maxHeight);
+            if (i == 15)
+            {
+                // Après 15 clés, spawn la vraie clé
+                yield return SpawnRealKeyCoroutine();
+            }
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    IEnumerator SpawnRealKeyCoroutine()
+    {
+        Transform cameraT = Camera.main != null ? Camera.main.transform : null;
+        Vector3 center = cameraT != null ? cameraT.position : transform.position; // fallback si pas de caméra
+
+        SpawnRealkey.Spawn(center, 0.5f, 5f);
+
+        yield return new WaitForSeconds(0.1f);
     }
 
 

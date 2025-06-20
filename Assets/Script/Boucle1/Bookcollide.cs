@@ -17,6 +17,7 @@ public class PlaySoundOnCollision : MonoBehaviour
     private float collisionTime = 0f;
     private float grabStartTime = 0f;
     private bool isGrabbed = false;
+    private bool voiceplayed = false;
 
     void Start()
     {
@@ -42,33 +43,13 @@ public class PlaySoundOnCollision : MonoBehaviour
 
     void Update()
     {
-        if (grabbable == null) return;
-
-        // Start grab
-        if (!isGrabbed && grabbable.SelectingPointsCount > 0)
+        if (collisionCount > 1 && voiceplayed == false)
         {
-            isGrabbed = true;
-            grabStartTime = Time.time;
-        }
-        Debug.Log(collisionCount);
-
-        // Release grab
-        if (isGrabbed && grabbable.SelectingPointsCount == 0)
-        {
-            isGrabbed = false;
-
-
-            float heldDuration = Time.time - grabStartTime;
-            float timeSinceCollision = Time.time - collisionTime;
-            Debug.Log("Held Duration: " + heldDuration);
-
-            if (collisionCount >= 1 && heldDuration >= 5f && voice != null)
-            {
-                StartCoroutine(PlayVoiceAndSpawn());  // fait parler la voix du père pour continuer l'histoire
-            }
-
+            voiceplayed = true; // On bloque tout de suite
+            StartCoroutine(PlayVoiceAndSpawn());
         }
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -96,9 +77,10 @@ public class PlaySoundOnCollision : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
-        Vector3 origin = transform.position;
-        SpawnLetter.Spawn(origin); 
+        // Vector3 origin = transform.position;  // <- inutile ici
+        SpawnLetter.Spawn(Camera.main.transform.position, 0.5f); // 0.5m autour de la caméra
     }
+
 
 
 

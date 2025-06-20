@@ -1,73 +1,39 @@
 using UnityEngine;
 
-public class SpawnRealKey : MonoBehaviour
+
+public class SpawnRealkey : MonoBehaviour
 {
-    public GameObject prefabToSpawn; 
-    public Transform cameraRig;
+    public static GameObject prefab;
+    public static LayerMask environmentMask = 1 << 6;
+    private static bool hasSpawned = false;
 
-    public float forwardDistance = 1.5f;
-    public float heightAboveGround = 5f;
-    public float spawnRadius = 1f;
-
-    public LetterManage letterManage; 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static void Spawn(Vector3 origin, float radius = 0.8f, float heightAbove = 5f, int maxAttempts = 10)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(letterManage.keysCalled);
-        if (letterManage.keysCalled)
+        if (hasSpawned)
         {
-            letterManage.keysCalled = false;
-            SpawnKey();
+            Debug.Log("Key has already spawned!");
+            return;
         }
-        
-    }
-
-    void SpawnKey()
-    {
-                Debug.Log("Spawn d'objet près de la caméra");
-        Vector3[] directions = new Vector3[]
-        {
-            cameraRig.forward,
-            -cameraRig.forward,
-            cameraRig.right,
-            -cameraRig.right
-        };
-
-        LayerMask environmentMask = 1 << 6; // Layer 6 = Environnement
-        float maxRaycastDistance = 10f;
-        int maxAttempts = 15;
-        float verticalOffset = 0.05f;
 
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
-            Vector3 chosenDirection = directions[Random.Range(0, directions.Length)];
-            Vector3 basePos = cameraRig.position + chosenDirection.normalized * forwardDistance;
+            Vector2 randomCircle = Random.insideUnitCircle * radius;
+            Vector3 offset = new Vector3(randomCircle.x, 0, randomCircle.y);
+            Vector3 rayOrigin = origin + offset + Vector3.up * heightAbove;
 
-            Vector2 randCircle = Random.insideUnitCircle * spawnRadius;
-            Vector3 offset = new Vector3(randCircle.x, 0, randCircle.y);
-
-            Vector3 rayOrigin = basePos + offset + Vector3.up * heightAboveGround;
-
-            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, maxRaycastDistance, environmentMask))
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 10f, environmentMask))
             {
-                string lowerName = hit.collider.gameObject.name.ToLower();
-
-                // ✅ Vérifie que c’est bien du sol ou une table
-                if (lowerName.Contains("floor") || lowerName.Contains("table"))
+                string name = hit.collider.gameObject.name.ToLower();
+                if (name.Contains("floor") || name.Contains("table"))
                 {
-                    Vector3 spawnPos = hit.point + Vector3.up * verticalOffset;
-                    Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+                    Vector3 spawnPos = hit.point + Vector3.up * 0.05f;
+                    Object.Instantiate(prefab, spawnPos, Quaternion.identity);
+                    Debug.Log($"Spawned prefab at {spawnPos} on attempt {attempt + 1}");
+                    hasSpawned = true; // Empêche d’en re-spawn d’autres
                     return;
                 }
             }
         }
-
+        Debug.LogWarning("Failed to spawn key in the allowed zone after max attempts.");
     }
-
 }

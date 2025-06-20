@@ -1,15 +1,16 @@
 using UnityEngine;
 
-
 public class SpawnLetter : MonoBehaviour
 {
     public static GameObject prefab;
     public static LayerMask environmentMask = 1 << 6; // Layer "Environnement"
 
-    public static void Spawn(Vector3 origin, float radius = 5f, float heightAbove = 5f, int maxAttempts = 10)
+    // Rayon par défaut réduit à 0.8f (au lieu de 5f)
+    public static void Spawn(Vector3 origin, float radius = 0.8f, float heightAbove = 5f, int maxAttempts = 10)
     {
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
+            // Rayon réduit, donc spawn proche du point d'origine
             Vector2 randomCircle = Random.insideUnitCircle * radius;
             Vector3 offset = new Vector3(randomCircle.x, 0, randomCircle.y);
             Vector3 rayOrigin = origin + offset + Vector3.up * heightAbove;
@@ -28,8 +29,4 @@ public class SpawnLetter : MonoBehaviour
         }
         Debug.LogWarning("Failed to spawn letter in the allowed zone after max attempts.");
     }
-
-
-    
-
 }
