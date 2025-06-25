@@ -15,8 +15,13 @@ public class LetterManage : MonoBehaviour
     public GameObject Keys;
     public GameObject RealKeys;
     public bool keysCalled = false;
-    public AudioSource Dong;
-    public bool dongplayed = false;
+    public AudioClip PencilClip;
+
+    public AudioClip Dongclip;
+    private bool dongplayed = false;
+
+    
+    public AudioSource DongSound;
 
     void Awake()
     {
@@ -28,6 +33,10 @@ public class LetterManage : MonoBehaviour
         {
             collisionAudioSource = GetComponent<AudioSource>();
         }
+        if (DongSound == null)
+        {
+            DongSound = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,6 +44,9 @@ public class LetterManage : MonoBehaviour
     {
         SpawnKeys.prefab = Keys;
         SpawnRealkey.prefab = RealKeys;
+        DongSound.clip = Dongclip;
+        DongSound.playOnAwake = false;
+
     }
 
     // Update is called once per frame
@@ -42,12 +54,7 @@ public class LetterManage : MonoBehaviour
     {
       if (grabbable == null) return;
 
-    // Joue le son Dong une fois si collisionCount > 2
-    if (collisionCount > 2 && !dongplayed && Dong != null)
-    {
-        Dong.Play();
-        dongplayed = true;
-    }
+
 
     // Start grab
     if (!isGrabbed && grabbable.SelectingPointsCount > 0)
@@ -72,7 +79,7 @@ public class LetterManage : MonoBehaviour
         if (!keysCalled && collisionCount >= 1 && heldDuration >= 2f)
         {
             keysCalled = true;
-            StartCoroutine(SpawnKeysCoroutine(50, 2f, 5f));
+            StartCoroutine(SpawnKeysCoroutine(100, 2f, 5f));
         }
     }
 
@@ -82,7 +89,7 @@ public class LetterManage : MonoBehaviour
     {
         Transform cameraT = Camera.main != null ? Camera.main.transform : null;
         Vector3 center = cameraT != null ? cameraT.position : transform.position; // fallback si pas de caméra
-
+        yield return new WaitForSeconds(1.0f); // Attendre un peu avant de commencer le spawn
         for (int i = 0; i < count; i++)
         {
             SpawnKeys.SpawnAbovePlayer(center, 1, radius, minHeight, maxHeight);
@@ -100,7 +107,7 @@ public class LetterManage : MonoBehaviour
         Transform cameraT = Camera.main != null ? Camera.main.transform : null;
         Vector3 center = cameraT != null ? cameraT.position : transform.position; // fallback si pas de caméra
 
-        SpawnRealkey.Spawn(center, 0.5f, 5f);
+        SpawnRealkey.Spawn(center, 2f, 5f);
 
         yield return new WaitForSeconds(0.1f);
     }
@@ -120,8 +127,19 @@ public class LetterManage : MonoBehaviour
             otherName.Contains("table")
         ) && collisionAudioSource != null)
         {
-            collisionAudioSource.Play();
             collisionCount++;
+
+                // Joue le son Dong une fois si collisionCount > 2
+            if (collisionCount == 2 && !dongplayed && DongSound != null)
+            {
+                Debug.Log(collisionCount +" HEYTURSZERDTFYYUGUH");
+                collisionAudioSource.clip = Dongclip;
+            }
+            else
+            {
+                collisionAudioSource.clip = PencilClip; // Réinitialise le clip si ce n'est pas le cas
+            }
+            collisionAudioSource.Play();
             hasCollided = true;
             collisionTime = Time.time;
         }

@@ -156,8 +156,9 @@ MonoBehaviour:
   Keys: {fileID: 2418377490682575963, guid: da73e83cf1bb66e499eb927e4e2a0805, type: 3}
   RealKeys: {fileID: 7060994181748257740, guid: b265451225b66ef4184a4484bf3cad3f, type: 3}
   keysCalled: 0
-  Dong: {fileID: 8444289533007033191, guid: 9810af686782cb64c857bedaf20ba3b6, type: 3}
-  dongplayed: 0
+  PencilClip: {fileID: 8300000, guid: 767ae9c1751d8814d87486c2a40ca976, type: 3}
+  Dongclip: {fileID: 8300000, guid: 9f8a86c698069144192a25ae3b5b4904, type: 3}
+  DongSound: {fileID: 8444289533007033191, guid: 9810af686782cb64c857bedaf20ba3b6, type: 3}
 --- !u!82 &633367637867666887
 AudioSource:
   m_ObjectHideFlags: 0

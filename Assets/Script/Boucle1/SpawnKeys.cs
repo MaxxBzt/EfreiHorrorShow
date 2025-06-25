@@ -25,7 +25,7 @@ public class SpawnKeys : MonoBehaviour
             float height = Random.Range(minHeight, maxHeight);
             Vector3 spawnPos = center + new Vector3(randomCircle.x, height, randomCircle.y);
             GameObject key = Object.Instantiate(prefab, spawnPos, Quaternion.identity, keysParent);
-            Debug.Log($"Pluie de clé : spawned key at {spawnPos}");
+            //Debug.Log($"Pluie de clé : spawned key at {spawnPos}");
 
         }
     }

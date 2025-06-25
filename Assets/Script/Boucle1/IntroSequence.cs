@@ -12,9 +12,9 @@ public class IntroSequenceVR : MonoBehaviour
     [Header("Spawn d'objet")]
     public GameObject prefabToSpawn;
     public Transform cameraRig;
-    public float forwardDistance = 1f;
+    public float forwardDistance = .5f;
     public float heightAboveGround = 5f;
-    public float spawnRadius = .5f;
+    public float spawnRadius = .25f;
 
     void Start()
     {
