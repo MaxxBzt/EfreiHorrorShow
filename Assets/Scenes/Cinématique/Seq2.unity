@@ -1229,7 +1229,7 @@ Animator:
   m_GameObject: {fileID: 184813616}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b239c2e9e64e34dd5897817c504a51ec, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2174,16 +2174,14 @@ PlayableDirector:
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -6096286104373849016, guid: 5c3f8f5109008462792e4e6135c856c5, type: 2}
-    value: {fileID: 184813619}
-  - key: {fileID: -1617684772318322758, guid: 5c3f8f5109008462792e4e6135c856c5, type: 2}
-    value: {fileID: 0}
   - key: {fileID: 7225719795124956342, guid: 5c3f8f5109008462792e4e6135c856c5, type: 2}
     value: {fileID: 158705540}
   - key: {fileID: 6821193792297549957, guid: 5c3f8f5109008462792e4e6135c856c5, type: 2}
     value: {fileID: 665375259}
   - key: {fileID: 3253976910552403874, guid: 5c3f8f5109008462792e4e6135c856c5, type: 2}
     value: {fileID: 13753498}
+  - key: {fileID: 7745167408598255758, guid: 5c3f8f5109008462792e4e6135c856c5, type: 2}
+    value: {fileID: 184813619}
   m_ExposedReferences:
     m_References:
     - 457ce031de07247c29ae43be9fd3869e: {fileID: 184813616}
