@@ -9,6 +9,7 @@ public class AshVoiceTrigger : MonoBehaviour
     {
         if (!triggered && other.CompareTag("MainCamera"))
         {
+            Debug.Log("AshVoiceTrigger activated: " + voice.clip.name);
             voice.Play();
             triggered = true;
             Destroy(gameObject); 
