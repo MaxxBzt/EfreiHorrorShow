@@ -18,7 +18,7 @@ public class LetterManage : MonoBehaviour
     public AudioClip PencilClip;
 
     public AudioClip Dongclip;
-    private bool dongplayed = false;
+    public bool dongplayed = false;
 
     
     public AudioSource DongSound;
@@ -130,14 +130,15 @@ public class LetterManage : MonoBehaviour
             collisionCount++;
 
                 // Joue le son Dong une fois si collisionCount > 2
-            if (collisionCount == 2 && !dongplayed && DongSound != null)
+           if (collisionCount == 2 && !dongplayed && DongSound != null)
             {
-                Debug.Log(collisionCount +" HEYTURSZERDTFYYUGUH");
+                Debug.Log(collisionCount + " HEYTURSZERDTFYYUGUH");
                 collisionAudioSource.clip = Dongclip;
+                dongplayed = true;
             }
             else
             {
-                collisionAudioSource.clip = PencilClip; // Réinitialise le clip si ce n'est pas le cas
+                collisionAudioSource.clip = PencilClip;;
             }
             collisionAudioSource.Play();
             hasCollided = true;
