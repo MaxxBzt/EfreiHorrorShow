@@ -7,12 +7,13 @@ public class AshVoiceTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!triggered && other.CompareTag("MainCamera"))
+        if (!triggered && other.name.Contains("CenterEye") || other.CompareTag("MainCamera"))
         {
             Debug.Log("AshVoiceTrigger activated: " + voice.clip.name);
             voice.Play();
             triggered = true;
-            Destroy(gameObject); 
+
+            Destroy(gameObject, voice.clip.length);
         }
     }
 }
