@@ -9,8 +9,8 @@ public class LetterManage : MonoBehaviour
     private int collisionCount = 0;
     private bool hasCollided = false;
     private float collisionTime = 0f;
-    private float grabStartTime = 0f;
-    private bool isGrabbed = false;
+
+    private bool isGrabbed = false; // Properly used now!
 
     public GameObject Keys;
     public GameObject RealKeys;
@@ -19,12 +19,18 @@ public class LetterManage : MonoBehaviour
 
     public AudioClip Dongclip;
     public bool dongplayed = false;
+    public AudioSource Redreading;
+    public GameObject Handgrab; 
+    public AudioSource Remembervoice;
 
-    
     public AudioSource DongSound;
+    public GameObject fogPrefab; 
+
+    public GameObject monstre;
 
     void Awake()
     {
+
         if (grabbable == null)
         {
             grabbable = GetComponentInChildren<Grabbable>();
@@ -39,63 +45,99 @@ public class LetterManage : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SpawnKeys.prefab = Keys;
         SpawnRealkey.prefab = RealKeys;
         DongSound.clip = Dongclip;
         DongSound.playOnAwake = false;
-
+        fogPrefab.SetActive(false); 
     }
 
-    // Update is called once per frame
     void Update()
     {
-      if (grabbable == null) return;
+        if (grabbable == null) return;
 
-
-
-    // Start grab
-    if (!isGrabbed && grabbable.SelectingPointsCount > 0)
-    {
-        isGrabbed = true;
-        grabStartTime = Time.time;
-    }
-    Debug.Log(collisionCount);
-
-    // Release grab
-    // ... Dans Update()
-
-    if (isGrabbed && grabbable.SelectingPointsCount == 0)
-    {
-        isGrabbed = false;
-
-        float heldDuration = Time.time - grabStartTime;
-        float timeSinceCollision = Time.time - collisionTime;
-        Debug.Log("Held Duration: " + heldDuration);
-
-        // Ajoute la condition !keysCalled
-        if (!keysCalled && collisionCount >= 1 && heldDuration >= 2f)
+        // Start grab: only trigger once per grab
+        if (!isGrabbed && grabbable.SelectingPointsCount > 0)
         {
-            keysCalled = true;
-            StartCoroutine(SpawnKeysCoroutine(100, 2f, 5f));
+            isGrabbed = true;
+            StartCoroutine(ReadingLetter());
+        }
+
+        // Release grab: reset
+        if (isGrabbed && grabbable.SelectingPointsCount == 0)
+        {
+            isGrabbed = false;
+        }
+
+       monstre.SetActive(true);
+       monstre.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 10f;
+
+    }
+
+    IEnumerator ReadingLetter()
+    {
+        // Play the reading voice
+        if (Redreading != null)
+        {
+            Redreading.Play();
+            // Fade out and destroy Handgrab after reading is finished (+1s buffer)
+            StartCoroutine(FadeOutAndDestroyHandgrab(Redreading.clip.length + 1f));
+        }
+
+        // Play the memory voice, if present
+        if (Remembervoice != null)
+        {
+            Remembervoice.Play();
+            yield return new WaitForSeconds(Remembervoice.clip.length);
+        }
+        else
+        {
+            yield return null;
         }
     }
 
+    IEnumerator FadeOutAndDestroyHandgrab(float duration)
+    {
+       Renderer render = gameObject.GetComponentInChildren<Renderer>();
+       fogPrefab.SetActive(true);
+       yield return new WaitForSeconds(4f);
+       render.enabled = false;
+       // decrease gently the rate over time of the fog until 0
+         if (fogPrefab != null)
+            {
+                ParticleSystem ps = fogPrefab.GetComponent<ParticleSystem>();
+                if (ps != null)
+                {
+                    var emission = ps.emission;
+                    float startRate = emission.rateOverTime.constant;
+                    float t = 0f;
+                    while (t < duration)
+                    {
+                        float newRate = Mathf.Lerp(startRate, 0f, t / duration);
+                        emission.rateOverTime = newRate;
+                        t += Time.deltaTime;
+                        yield return null;
+                    }
+                    emission.rateOverTime = 0f; // Assure que c'est à 0 à la fin
+                }
+            }
+
+      Handgrab.SetActive(false);
     }
 
-     IEnumerator SpawnKeysCoroutine(int count, float radius = 1f, float minHeight = 5f, float maxHeight = 7f)
+    IEnumerator SpawnKeysCoroutine(int count, float radius = 1f, float minHeight = 5f, float maxHeight = 7f)
     {
         Transform cameraT = Camera.main != null ? Camera.main.transform : null;
-        Vector3 center = cameraT != null ? cameraT.position : transform.position; // fallback si pas de caméra
-        yield return new WaitForSeconds(1.0f); // Attendre un peu avant de commencer le spawn
+        Vector3 center = cameraT != null ? cameraT.position : transform.position;
+        yield return new WaitForSeconds(1.0f);
         for (int i = 0; i < count; i++)
         {
             SpawnKeys.SpawnAbovePlayer(center, 1, radius, minHeight, maxHeight);
             if (i == 15)
             {
-                // Après 15 clés, spawn la vraie clé
+                // After 15 keys, spawn the real key
                 yield return SpawnRealKeyCoroutine();
             }
             yield return new WaitForSeconds(0.1f);
@@ -105,15 +147,10 @@ public class LetterManage : MonoBehaviour
     IEnumerator SpawnRealKeyCoroutine()
     {
         Transform cameraT = Camera.main != null ? Camera.main.transform : null;
-        Vector3 center = cameraT != null ? cameraT.position : transform.position; // fallback si pas de caméra
-
+        Vector3 center = cameraT != null ? cameraT.position : transform.position;
         SpawnRealkey.Spawn(center, 2f, 5f);
-
         yield return new WaitForSeconds(0.1f);
     }
-
-
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -129,8 +166,8 @@ public class LetterManage : MonoBehaviour
         {
             collisionCount++;
 
-                // Joue le son Dong une fois si collisionCount > 2
-           if (collisionCount == 2 && !dongplayed && DongSound != null)
+            // Play Dong only once if collisionCount == 2
+            if (collisionCount == 2 && !dongplayed && DongSound != null)
             {
                 Debug.Log(collisionCount + " HEYTURSZERDTFYYUGUH");
                 collisionAudioSource.clip = Dongclip;
@@ -138,7 +175,7 @@ public class LetterManage : MonoBehaviour
             }
             else
             {
-                collisionAudioSource.clip = PencilClip;;
+                collisionAudioSource.clip = PencilClip;
             }
             collisionAudioSource.Play();
             hasCollided = true;

@@ -1047,6 +1047,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Makeprouddaddy
       objectReference: {fileID: 0}
+    - target: {fileID: 3195638720126805739, guid: 0c64899ca70c24f4d988228cf89c6c14, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1073,6 +1077,10 @@ PrefabInstance:
     - target: {fileID: 2106180741217560338, guid: 1cef42f9e86634b4ba861b7616bea34f, type: 3}
       propertyPath: m_Name
       value: AshPanicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685624750196818853, guid: 1cef42f9e86634b4ba861b7616bea34f, type: 3}
+      propertyPath: m_Volume
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7152246197804663840, guid: 1cef42f9e86634b4ba861b7616bea34f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1137,6 +1145,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3869297836123288688}
     m_Modifications:
+    - target: {fileID: 2576127838144784907, guid: 7b6ee89ead8351a419d4b87676088c56, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4912387828325716541, guid: 7b6ee89ead8351a419d4b87676088c56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000010821968

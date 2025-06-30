@@ -96,6 +96,9 @@ public class OneGrabBook : MonoBehaviour
         // Supprime l'objet HandGrab
         if (handGrabObject != null)
             Destroy(handGrabObject);
+        
+        Ashvoice1.Stop();
+        Ashvoice2.Stop();
     }
 
 }
