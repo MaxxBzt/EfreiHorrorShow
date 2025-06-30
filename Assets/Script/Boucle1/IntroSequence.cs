@@ -6,7 +6,7 @@ using Unity.VisualScripting; // Nécessaire pour TMP_Text
 public class IntroSequenceVR : MonoBehaviour
 {
     [Header("Effets d'intro")]
-    public GameObject blinkEffect;  
+    public GameObject blinkEffect;
     public GameObject introText;
 
     [Header("Spawn d'objet")]
@@ -15,9 +15,17 @@ public class IntroSequenceVR : MonoBehaviour
     public float forwardDistance = .5f;
     public float heightAboveGround = 5f;
     public float spawnRadius = .25f;
+    public GameObject PanelDark;
+    public AudioClip WeirdSound;
+    public AudioSource WeirdSoundSource;
 
     void Start()
     {
+        if (WeirdSoundSource != null && WeirdSound != null)
+        {
+            WeirdSoundSource.clip = WeirdSound;
+        }
+        PanelDark.SetActive(true);
         blinkEffect.SetActive(false);
         introText.SetActive(false);
 
@@ -26,6 +34,10 @@ public class IntroSequenceVR : MonoBehaviour
 
     IEnumerator PlayIntro()
     {
+        PanelDark.SetActive(true);
+        WeirdSoundSource.Play();
+        yield return new WaitForSeconds(5f);
+
         blinkEffect.SetActive(true);
 
         Material mat = blinkEffect.GetComponent<MeshRenderer>().material;
@@ -35,10 +47,10 @@ public class IntroSequenceVR : MonoBehaviour
 
         while (t < duration)
         {
-            mat.SetFloat("_time", t+1);
+            mat.SetFloat("_time", t + 1);
             t += Time.deltaTime;
             yield return null;
-            mat.SetFloat("_width", Mathf.Lerp(.5f,.8f,t/duration));
+            mat.SetFloat("_width", Mathf.Lerp(.5f, .8f, t / duration));
         }
 
         blinkEffect.SetActive(false);
@@ -67,7 +79,7 @@ public class IntroSequenceVR : MonoBehaviour
             -cameraRig.right
         };
 
-        LayerMask environmentMask = 1<<6;// Layer 6 = Environnement
+        LayerMask environmentMask = 1 << 6;// Layer 6 = Environnement
         float maxRaycastDistance = 10f;
         int maxAttempts = 15;
         float verticalOffset = 0.05f;
