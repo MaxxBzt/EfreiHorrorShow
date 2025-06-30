@@ -44,7 +44,7 @@ public class IntroSequenceVR : MonoBehaviour
         PanelDark.SetActive(true);
 
         /*TO DO : ajouter un son d'intro */
-        //WeirdSoundSource.Play();
+        WeirdSoundSource.Play();
         yield return new WaitForSeconds(4f);
         Image panelImage = PanelDark.transform.GetChild(0).GetComponent<Image>();
         if (panelImage != null)
@@ -89,7 +89,7 @@ public class IntroSequenceVR : MonoBehaviour
         yield return new WaitForSeconds(5f);
         introText.SetActive(false);
         SpawnObjectNearCamera();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         whatwasthatbook.Play();
     }
 
