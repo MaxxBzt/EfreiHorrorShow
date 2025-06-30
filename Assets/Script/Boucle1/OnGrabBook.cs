@@ -49,7 +49,6 @@ public class OneGrabBook : MonoBehaviour
             if (coverAnimation != null)
                 coverAnimation.SetTrigger("OpenBook");
 
-            // Lance la séquence voix + haptique
             if (voiceCoroutine != null) StopCoroutine(voiceCoroutine);
             voiceCoroutine = StartCoroutine(VoiceAndHapticSequence());
         }
@@ -60,7 +59,6 @@ public class OneGrabBook : MonoBehaviour
             if (CloseBookAudioSource != null)
                 CloseBookAudioSource.Play();
 
-            // Stop toute séquence et vibration
             if (voiceCoroutine != null) StopCoroutine(voiceCoroutine);
             OVRInput.SetControllerVibration(0, 0, controller);
         }
@@ -68,34 +66,36 @@ public class OneGrabBook : MonoBehaviour
 
     private IEnumerator VoiceAndHapticSequence()
     {
-        // Vibration légère pendant la première voix
-        OVRInput.SetControllerVibration(1f, 0.2f, controller);
-
-        // Lecture de la première voix
+        // Vibration légère pendant Ashvoice1
         if (Ashvoice1 != null)
+        {
             Ashvoice1.Play();
+            OVRInput.SetControllerVibration(1f, 0.2f, controller);
+            while (Ashvoice1.isPlaying)
+            {
+                yield return null; // attend la frame suivante
+            }
+            OVRInput.SetControllerVibration(0, 0, controller); // Stop la vibration à la fin
+        }
 
-        // Attend la fin de la première voix
-        if (Ashvoice1 != null)
-            yield return new WaitForSeconds(Ashvoice1.clip.length);
+        // Pause SANS vibration (ex : 2 secondes)
+        yield return new WaitForSeconds(2f);
 
-        // Garde la vibration légère pendant 2 secondes
-        yield return new WaitForSeconds(1f);
-
-        // Vibration plus forte et lecture de la deuxième voix
-        OVRInput.SetControllerVibration(1f, 1f, controller);
+        // Vibration forte pendant Ashvoice2
         if (Ashvoice2 != null)
+        {
             Ashvoice2.Play();
-
-        // Attend la fin de la deuxième voix
-        if (Ashvoice2 != null)
-            yield return new WaitForSeconds(Ashvoice2.clip.length);
-
-        // Stop la vibration
-        OVRInput.SetControllerVibration(0, 0, controller);
+            OVRInput.SetControllerVibration(1f, 1f, controller);
+            while (Ashvoice2.isPlaying)
+            {
+                yield return null;
+            }
+            OVRInput.SetControllerVibration(0, 0, controller); // Stop la vibration à la fin
+        }
 
         // Supprime l'objet HandGrab
         if (handGrabObject != null)
             Destroy(handGrabObject);
     }
+
 }

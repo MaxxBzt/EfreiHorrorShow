@@ -11,6 +11,8 @@ public class PlaySoundOnCollision : MonoBehaviour
     private int collisionCount = 0;
 
     public GameObject letterPrefab;
+    public AudioSource whoTalked;
+    public AudioSource AshePanickedVoice;
 
 
     private bool hasCollided = false;
@@ -73,9 +75,16 @@ public class PlaySoundOnCollision : MonoBehaviour
     IEnumerator PlayVoiceAndSpawn()
     {
         yield return new WaitForSeconds(1f);
+        whoTalked.Play();
+        yield return new WaitForSeconds(5f);
         voice.Play();
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(voice.clip.length);
+        if (AshePanickedVoice != null)
+        {
+            AshePanickedVoice.Play();
+        }
+        yield return new WaitForSeconds(AshePanickedVoice.clip.length + 1f);
 
         // Vector3 origin = transform.position;  // <- inutile ici
         SpawnLetter.Spawn(Camera.main.transform.position, 0.5f); // 0.5m autour de la caméra
