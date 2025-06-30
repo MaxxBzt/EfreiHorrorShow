@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Cine\u0301matique/Real Seq 4.unity"
     guid: 233e7a7dcc5f343ba97b20285d01641d
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: f6868d2d198534eaa8ab7450647486fc
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: d1e639cfca21f4afe88583c59dd3e79a
   - enabled: 0
     path: "Assets/Scenes/Cin\xE9matique/S\xE9quence1.unity"
     guid: 3787e99ac8213f848879f5f2dcac239e

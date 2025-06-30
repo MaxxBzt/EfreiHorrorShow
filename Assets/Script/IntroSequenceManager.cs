@@ -14,9 +14,9 @@ public class IntroSequenceManager : MonoBehaviour
     public AudioClip whisperClip;
     public AudioClip heartbeatClip;
 
-    public GameObject redEyesFlicker; // your glowing red eyes PNG (disabled by default)
-    public Light flashLight; // optional, for flash at final CLACK
-    public float monsterGrowDuration = 2f;
+    public GameObject redEyesFlicker; 
+    public float monsterGrowDuration = 8.5f;
+
 
     public GameObject monsterObject;
     public string nextSceneName = "Main Menu";
@@ -29,12 +29,27 @@ public class IntroSequenceManager : MonoBehaviour
 
     IEnumerator IntroSequence()
     {
-        // Afficher texte d’intro
+    
+        // 1. Hide text initially
+        introText.gameObject.SetActive(false);
         introCanvas.alpha = 0;
+
+        yield return new WaitForSeconds(2f);
+
+        // 3. Show + fade
         introText.text = "Efrei Horror Show\npresents";
-        yield return FadeCanvas(1, 1.5f);
+        introText.gameObject.SetActive(true);
+        yield return FadeTextCanvas(1f, 1.5f);
+
+        // 4. Hold
         yield return new WaitForSeconds(5f);
-        yield return FadeCanvas(0, 1.5f); // fondu vers noir
+
+        // 5. Fade out
+        yield return FadeTextCanvas(0f, 1.5f);
+        introText.gameObject.SetActive(false);
+
+
+
 
         // 2. Voix-off Ash
         yield return new WaitForSeconds(1f);
@@ -48,7 +63,7 @@ public class IntroSequenceManager : MonoBehaviour
         voiceSource.Play();
 
         // 3s: Eyes flicker + whisper
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         redEyesFlicker.SetActive(true);
         voiceSource.PlayOneShot(whisperClip);
 
@@ -58,9 +73,15 @@ public class IntroSequenceManager : MonoBehaviour
         // 6s: Eyes flash again + heartbeat
         yield return new WaitForSeconds(1.5f); // (now at 6s mark)
         redEyesFlicker.SetActive(true);
-        voiceSource.PlayOneShot(heartbeatClip); // heartbeat sound
+        voiceSource.PlayOneShot(heartbeatClip); 
 
         yield return new WaitForSeconds(1.5f);
+        redEyesFlicker.SetActive(false);
+
+         yield return new WaitForSeconds(1.5f);
+        redEyesFlicker.SetActive(true);
+
+         yield return new WaitForSeconds(1.5f);
         redEyesFlicker.SetActive(false);
 
 
@@ -80,7 +101,7 @@ public class IntroSequenceManager : MonoBehaviour
         while (t < monsterGrowDuration)
         {
             t += Time.deltaTime;
-            float progress = t / monsterGrowDuration;
+            float progress = Mathf.SmoothStep(0f, 1f, t / monsterGrowDuration);
             monsterObject.transform.localScale = Vector3.Lerp(originalScale, targetScale, progress);
             yield return null;
         }
@@ -88,20 +109,26 @@ public class IntroSequenceManager : MonoBehaviour
 
     IEnumerator FadeToBlack()
     {
-        float duration = 1.5f;
+        float duration = 2.5f; // longer, slower fade
         float t = 0f;
 
         while (t < duration)
         {
             t += Time.deltaTime;
-            introCanvas.alpha = Mathf.Lerp(0, 1, t / duration);
+            float eased = Mathf.SmoothStep(0f, 1f, t / duration);
+            introCanvas.alpha = eased;
             yield return null;
         }
 
         introCanvas.alpha = 1;
+
+        // Load scene only once fade fully finished
+        SceneManager.LoadScene(nextSceneName);
     }
 
-    IEnumerator FadeCanvas(float targetAlpha, float duration)
+
+
+    IEnumerator FadeTextCanvas(float targetAlpha, float duration)
     {
         float startAlpha = introCanvas.alpha;
         float time = 0f;
@@ -109,12 +136,16 @@ public class IntroSequenceManager : MonoBehaviour
         while (time < duration)
         {
             time += Time.deltaTime;
-            introCanvas.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
+            float t = time / duration;
+            float eased = Mathf.SmoothStep(startAlpha, targetAlpha, t); // smooth animation
+            introCanvas.alpha = eased;
             yield return null;
         }
 
         introCanvas.alpha = targetAlpha;
     }
+
+
 
 
 }
