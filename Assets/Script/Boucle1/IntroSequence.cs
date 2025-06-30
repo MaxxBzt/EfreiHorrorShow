@@ -21,6 +21,8 @@ public class IntroSequenceVR : MonoBehaviour
     public AudioClip WeirdSound;
     public AudioSource WeirdSoundSource;
     public GameObject Monster;
+    public AudioSource whatwasthatdream;
+    public AudioSource whatwasthatbook;
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class IntroSequenceVR : MonoBehaviour
         introText.SetActive(false);
         Monster.SetActive(false);
 
+
         StartCoroutine(PlayIntro());
     }
 
@@ -42,21 +45,19 @@ public class IntroSequenceVR : MonoBehaviour
 
         /*TO DO : ajouter un son d'intro */
         //WeirdSoundSource.Play();
-        yield return new WaitForSeconds(5f);
-        Image panelImage = PanelDark.GetComponent<Image>();
+        yield return new WaitForSeconds(4f);
+        Image panelImage = PanelDark.transform.GetChild(0).GetComponent<Image>();
         if (panelImage != null)
-            yield return StartCoroutine(FadeOutPanel(panelImage, 1f)); // 1 seconde de fade
+            yield return StartCoroutine(FadeOutPanel(panelImage, 3f)); // 5 secondes de fade
         else
         PanelDark.SetActive(false);
-
+        
+        Debug.Log("PanelDark désactivé");
         //Monster appear
         Monster.SetActive(true);
         /*TO DO : ajouter un son de monstre */
         yield return new WaitForSeconds(1f);
         Monster.SetActive(false);
-        PanelDark.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        PanelDark.SetActive(false);
         
         //Start intro
         blinkEffect.SetActive(true);
@@ -77,6 +78,7 @@ public class IntroSequenceVR : MonoBehaviour
         blinkEffect.SetActive(false);
 
         introText.SetActive(true);
+        whatwasthatdream.Play();
         yield return new WaitForSeconds(10f);
 
         TMP_Text tmp = introText.GetComponent<TMP_Text>();
@@ -87,6 +89,8 @@ public class IntroSequenceVR : MonoBehaviour
         yield return new WaitForSeconds(5f);
         introText.SetActive(false);
         SpawnObjectNearCamera();
+        yield return new WaitForSeconds(5f);
+        whatwasthatbook.Play();
     }
 
     IEnumerator FadeOutPanel(Image panel, float duration)

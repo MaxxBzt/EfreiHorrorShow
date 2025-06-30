@@ -7,10 +7,10 @@ using UnityEngine.Serialization;
 public class TypewriterEffect : MonoBehaviour
 {
     [SerializeField] private TMP_Text tmpText;
-    [SerializeField] private float _DELAY = 0.1f;
+    [SerializeField] private float _DELAY = 0.05f;
     [SerializeField] private float _POPSCALE = 1.2f;
-    [SerializeField] private float popUpDuration = 0.07f;
-    [SerializeField] private float popDownDuration = 0.15f;
+    [SerializeField] private float popUpDuration = 0.03f;
+    [SerializeField] private float popDownDuration = 0.7f;
 
     public AnimationCurve popUpCurve = AnimationCurve.EaseInOut(0, 1f, 1, 1.2f);
     public AnimationCurve popDownCurve = AnimationCurve.EaseInOut(0, 1.2f, 1, 1f);
