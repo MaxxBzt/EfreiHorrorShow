@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting; // Nécessaire pour TMP_Text
+using UnityEngine.UI;
+
 
 public class IntroSequenceVR : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class IntroSequenceVR : MonoBehaviour
     public GameObject PanelDark;
     public AudioClip WeirdSound;
     public AudioSource WeirdSoundSource;
+    public GameObject Monster;
 
     void Start()
     {
@@ -28,6 +31,7 @@ public class IntroSequenceVR : MonoBehaviour
         PanelDark.SetActive(true);
         blinkEffect.SetActive(false);
         introText.SetActive(false);
+        Monster.SetActive(false);
 
         StartCoroutine(PlayIntro());
     }
@@ -35,9 +39,26 @@ public class IntroSequenceVR : MonoBehaviour
     IEnumerator PlayIntro()
     {
         PanelDark.SetActive(true);
-        WeirdSoundSource.Play();
-        yield return new WaitForSeconds(5f);
 
+        /*TO DO : ajouter un son d'intro */
+        //WeirdSoundSource.Play();
+        yield return new WaitForSeconds(5f);
+        Image panelImage = PanelDark.GetComponent<Image>();
+        if (panelImage != null)
+            yield return StartCoroutine(FadeOutPanel(panelImage, 1f)); // 1 seconde de fade
+        else
+        PanelDark.SetActive(false);
+
+        //Monster appear
+        Monster.SetActive(true);
+        /*TO DO : ajouter un son de monstre */
+        yield return new WaitForSeconds(1f);
+        Monster.SetActive(false);
+        PanelDark.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        PanelDark.SetActive(false);
+        
+        //Start intro
         blinkEffect.SetActive(true);
 
         Material mat = blinkEffect.GetComponent<MeshRenderer>().material;
@@ -67,6 +88,24 @@ public class IntroSequenceVR : MonoBehaviour
         introText.SetActive(false);
         SpawnObjectNearCamera();
     }
+
+    IEnumerator FadeOutPanel(Image panel, float duration)
+    {
+        float elapsed = 0f;
+        Color startColor = panel.color;
+        Color endColor = startColor;
+        endColor.a = 0f;
+
+        while (elapsed < duration)
+        {
+            panel.color = Color.Lerp(startColor, endColor, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        panel.color = endColor;
+        panel.gameObject.SetActive(false);
+    }
+
 
     void SpawnObjectNearCamera()
     {
