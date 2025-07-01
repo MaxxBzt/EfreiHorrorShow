@@ -3147,6 +3147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mirror Taylor (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7e45c52b1dbcb4bbca92772cb74a5b83, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 7e45c52b1dbcb4bbca92772cb74a5b83, type: 3}
       propertyPath: m_Controller
       value: 
@@ -6626,15 +6630,15 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 2756984694383715252, guid: ae5448db8735b4645ab1829562f71de0, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 353910880}
   - key: {fileID: 6870712454812951634, guid: ae5448db8735b4645ab1829562f71de0, type: 2}
     value: {fileID: 1198695201}
   - key: {fileID: 7729789923331765204, guid: ae5448db8735b4645ab1829562f71de0, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1844750678}
   - key: {fileID: -5028539471791950758, guid: ae5448db8735b4645ab1829562f71de0, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1527059740}
   - key: {fileID: 4344191242715985806, guid: ae5448db8735b4645ab1829562f71de0, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 317610547}
   - key: {fileID: 8098256541543643722, guid: ae5448db8735b4645ab1829562f71de0, type: 2}
     value: {fileID: 665375259}
   - key: {fileID: 2009550434521224831, guid: ae5448db8735b4645ab1829562f71de0, type: 2}
@@ -15371,6 +15375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mirror Taylor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7e45c52b1dbcb4bbca92772cb74a5b83, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 7e45c52b1dbcb4bbca92772cb74a5b83, type: 3}
       propertyPath: m_Controller
       value: 
@@ -18507,6 +18515,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7e45c52b1dbcb4bbca92772cb74a5b83, type: 3}
       propertyPath: m_Name
       value: Mirror Taylor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7e45c52b1dbcb4bbca92772cb74a5b83, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 7e45c52b1dbcb4bbca92772cb74a5b83, type: 3}
       propertyPath: m_Controller

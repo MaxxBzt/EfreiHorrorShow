@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameStartMenu : MonoBehaviour
 {
@@ -10,28 +9,42 @@ public class GameStartMenu : MonoBehaviour
     public GameObject options;
     public GameObject about;
 
-    [Header("Main Menu Buttons")]
-    public Button startButton;
-    public Button optionButton;
-    public Button aboutButton;
-    public Button quitButton;
-
-    public List<Button> returnButtons;
-
-    // Start is called before the first frame update
     void Start()
     {
         EnableMainMenu();
+    }
 
-        //Hook events
-        startButton.onClick.AddListener(StartGame);
-        optionButton.onClick.AddListener(EnableOption);
-        aboutButton.onClick.AddListener(EnableAbout);
-        quitButton.onClick.AddListener(QuitGame);
-
-        foreach (var item in returnButtons)
+    void Update()
+    {
+        // --- Start game (A on right controller)
+        if (OVRInput.GetDown(OVRInput.Button.One))
         {
-            item.onClick.AddListener(EnableMainMenu);
+            StartGame();
+        }
+
+        // --- Option menu (B on right controller)
+        if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            EnableOption();
+        }
+
+        // --- About (X on left controller)
+        if (OVRInput.GetDown(OVRInput.Button.Three))
+        {
+            EnableAbout();
+        }
+
+        // --- Quit game (Y on left controller OR Menu button)
+        if (OVRInput.GetDown(OVRInput.Button.Four) || OVRInput.GetDown(OVRInput.Button.Start))
+        {
+            QuitGame();
+        }
+
+        // --- Return to main menu: you can pick a button (here, B or Y as examples)
+        // (Comment this out if you want to control page return in a different way)
+        if (OVRInput.GetDown(OVRInput.Button.Two) || OVRInput.GetDown(OVRInput.Button.Four))
+        {
+            EnableMainMenu();
         }
     }
 
@@ -43,8 +56,8 @@ public class GameStartMenu : MonoBehaviour
     public void StartGame()
     {
         HideAll();
+        // Replace with your scene transition logic
         SceneTransitionManager.singleton.GoToSceneAsync(0);
-
     }
 
     public void HideAll()
@@ -60,12 +73,14 @@ public class GameStartMenu : MonoBehaviour
         options.SetActive(false);
         about.SetActive(false);
     }
+
     public void EnableOption()
     {
         mainMenu.SetActive(false);
         options.SetActive(true);
         about.SetActive(false);
     }
+
     public void EnableAbout()
     {
         mainMenu.SetActive(false);
