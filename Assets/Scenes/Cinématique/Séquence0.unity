@@ -8228,6 +8228,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4571605982943762130, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d1d799e7cba1743aa8c4b71658ad9645, type: 2}
     - target: {fileID: 919132149155446097, guid: 2df5b0ad176d94518b824d3d3e013d56, type: 3}
       propertyPath: m_Name
       value: Humanoid
@@ -9036,7 +9040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eec1c7e394e14479bb8a9a8f50184d4f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4912368
+      value: 1.155
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eec1c7e394e14479bb8a9a8f50184d4f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9044,7 +9048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eec1c7e394e14479bb8a9a8f50184d4f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.9223589
+      value: -1.88
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eec1c7e394e14479bb8a9a8f50184d4f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9477,7 +9481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eebe570aec1e54cb795c4939c9afa610, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2592368
+      value: 0.496
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eebe570aec1e54cb795c4939c9afa610, type: 3}
       propertyPath: m_LocalPosition.y
