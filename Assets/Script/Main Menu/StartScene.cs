@@ -35,7 +35,7 @@ public class StartScene : MonoBehaviour
         introText.gameObject.SetActive(false);
 
         // Optional short pause
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         // Load the next scene
         SceneManager.LoadScene(nextSceneName);
