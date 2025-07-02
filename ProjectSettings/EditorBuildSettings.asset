@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: d1e639cfca21f4afe88583c59dd3e79a
+  - enabled: 1
+    path: Assets/Scenes/MainMenu_StartScene.unity
+    guid: 3f0bd13c678c148de82f7832f54c8f66
   - enabled: 0
     path: "Assets/Scenes/Cin\xE9matique/S\xE9quence1.unity"
     guid: 3787e99ac8213f848879f5f2dcac239e
