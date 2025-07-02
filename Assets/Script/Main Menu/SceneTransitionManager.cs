@@ -37,17 +37,12 @@ public class SceneTransitionManager : MonoBehaviour
 
     public IEnumerator LoadSceneRoutine(int buildIndex)
     {
-        // Begin loading, but don't switch immediately
         AsyncOperation op = SceneManager.LoadSceneAsync(buildIndex);
         op.allowSceneActivation = false;
 
-        // (Optional) show a loading spinner, progress bar, etc.
-
-        // Wait until Unity has loaded to 90% (it actually stops at .9 until you set allowSceneActivation = true)
         while (op.progress < 0.9f)
             yield return null;
 
-        // Now permit activation—scene swap happens this frame
         op.allowSceneActivation = true;
     }
 
