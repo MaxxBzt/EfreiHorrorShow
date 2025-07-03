@@ -7,36 +7,9 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
-    guid: 6bf7ee0904f9a34419362baa9026d81c
+    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: "Assets/Scenes/Cine\u0301matique/S\xE9quence0.unity"
-    guid: d30a57e4af1cd41c0a627d4aa10f97ac
-  - enabled: 1
-    path: "Assets/Scenes/Cine\u0301matique/Seq1.unity"
-    guid: 42fa4072cf98a9b4aaa9b41fad4307c1
-  - enabled: 1
-    path: "Assets/Scenes/Cine\u0301matique/Seq2.unity"
-    guid: d9b84cc3986164054ba93a243f633e44
-  - enabled: 1
-    path: "Assets/Scenes/Cine\u0301matique/Seq3.unity"
-    guid: 70b879e53564b4f7b9cca913a31b4894
-  - enabled: 1
-    path: "Assets/Scenes/Cine\u0301matique/Real Seq 4.unity"
-    guid: 233e7a7dcc5f343ba97b20285d01641d
-  - enabled: 1
-    path: Assets/Scenes/IntroScene.unity
-    guid: f6868d2d198534eaa8ab7450647486fc
-  - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
-    guid: d1e639cfca21f4afe88583c59dd3e79a
-  - enabled: 1
-    path: Assets/Scenes/MainMenu_StartScene.unity
-    guid: 3f0bd13c678c148de82f7832f54c8f66
-  - enabled: 1
-    path: "Assets/Scenes/Cine\u0301matique/Midway Scene.unity"
-    guid: 2ec7c5117fe7c49e880ae52530460fa1
-  - enabled: 0
-    path: "Assets/Scenes/Cin\xE9matique/S\xE9quence1.unity"
+    path: Assets/Scenes/Boucle1.unity
     guid: 3787e99ac8213f848879f5f2dcac239e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: cb7bf2f3f7410e3468fce40016abc1d6, type: 2}
