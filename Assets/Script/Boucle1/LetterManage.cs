@@ -27,6 +27,8 @@ public class LetterManage : MonoBehaviour
     public GameObject fogPrefab; 
 
     public GameObject monstre;
+    private GameObject monstreInstance;
+
 
     void Awake()
     {
@@ -47,6 +49,8 @@ public class LetterManage : MonoBehaviour
 
     void Start()
     {
+
+
         SpawnKeys.prefab = Keys;
         SpawnRealkey.prefab = RealKeys;
         DongSound.clip = Dongclip;
@@ -72,8 +76,60 @@ public class LetterManage : MonoBehaviour
             isGrabbed = false;
         }
 
+        //Apparition rapide du monstre et flippant un peup
+        //cherche sur la scène un objet qui s'appelle darkness
+
+
+
 
     }
+
+    IEnumerator MonstreApparition(GameObject darkness)
+    {
+        //prendre l'enfant direct de darkness
+        Transform panelTransform = darkness.transform.GetChild(0);
+        GameObject panel = panelTransform.gameObject;
+        monstreInstance = Instantiate(monstre, new Vector3(0, 0, 0), Quaternion.identity);
+
+        monstreInstance.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        panel.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        panel.SetActive(false);
+        
+        yield return new WaitForSeconds(2f);
+
+        panel.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        panel.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+        panel.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        panel.SetActive(false);
+         monstreInstance.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+       
+
+
+
+
+        
+
+
+    }
+
 
     IEnumerator ReadingLetter(float timewait)
     {
@@ -95,6 +151,11 @@ public class LetterManage : MonoBehaviour
             yield return null;
         }
         gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+        GameObject darkness = GameObject.Find("darkness");
+        StartCoroutine(MonstreApparition(darkness));
     }
 
     IEnumerator FadeOutAndDestroyHandgrab(float duration)
