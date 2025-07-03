@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class SpawningMonster : MonoBehaviour
 {
-    public GameObject monsterPrefab;     // Assigne ton prefab ici dans l'inspecteur !
-    public Transform cameraTransform;    // Peut être laissé vide, auto-assigné sinon
+    public GameObject monsterPrefab;
+    public Transform cameraTransform;
     public float spawnDistance = 20f;
     public float travelTime = 30f;
 
     private GameObject monsterInstance;
-    private Vector3 startPos, endPos;
     private float elapsed = 0f;
     private bool moving = false;
+    private float speed = 0f;
 
     void OnEnable()
     {
@@ -24,11 +24,18 @@ public class SpawningMonster : MonoBehaviour
         }
 
         // Calculer la position de spawn devant la caméra
-        startPos = cameraTransform.position + cameraTransform.forward * spawnDistance;
-        endPos = cameraTransform.position;
+        Vector3 startPos = cameraTransform.position + cameraTransform.forward * spawnDistance;
 
         // Instancier le monstre à la bonne position et rotation
         monsterInstance = Instantiate(monsterPrefab, startPos, Quaternion.identity);
+
+        // Calculer la **distance initiale**
+        float distance = Vector3.Distance(startPos, cameraTransform.position);
+
+        // Calculer la **vitesse** pour arriver en travelTime, en ligne droite
+        speed = distance / travelTime;
+
+        elapsed = 0f;
         moving = true;
     }
 
@@ -38,16 +45,29 @@ public class SpawningMonster : MonoBehaviour
             return;
 
         elapsed += Time.deltaTime;
-        float t = Mathf.Clamp01(elapsed / travelTime);
 
-        // Interpolation de la position
-        monsterInstance.transform.position = Vector3.Lerp(startPos, endPos, t);
+        // Direction dynamique : toujours vers la position de la caméra à chaque frame
+        Vector3 direction = (cameraTransform.position - monsterInstance.transform.position).normalized;
 
-        // Toujours regarder la caméra
+        // Distance à avancer cette frame
+        float step = speed * Time.deltaTime;
+
+        // Avancer vers la caméra : move jusqu’à la caméra (mais jamais “traverser”)
+        float distanceToTarget = Vector3.Distance(monsterInstance.transform.position, cameraTransform.position);
+        if (step > distanceToTarget)
+        {
+            monsterInstance.transform.position = cameraTransform.position;
+        }
+        else
+        {
+            monsterInstance.transform.position += direction * step;
+        }
+
+        // Regarde toujours la caméra
         monsterInstance.transform.LookAt(cameraTransform.position);
 
-        // Stopper le mouvement à la fin (optionnel)
-        if (t >= 1f)
+        // Arrêt : si travelTime écoulé OU très proche de la caméra
+        if (elapsed >= travelTime || distanceToTarget < 0.1f)
             moving = false;
     }
 }

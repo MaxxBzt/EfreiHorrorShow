@@ -9,8 +9,10 @@ public class FindingKey : MonoBehaviour
     public AudioClip Soundeffect;
     public AudioSource SoundSource;
 
+    public AudioClip AshSearchingClip;
     public AudioSource AshSearching;
 
+    public AudioClip MonsterEndingClip;
     public AudioSource MonsterEnding;
     public AudioSource Stinger;
 
@@ -22,10 +24,16 @@ public class FindingKey : MonoBehaviour
     private float time = 0f;
     public bool timeStarted = false;
     private bool endingPanelLaunched = false;
+    private bool ashplayed = false;
 
 
     void Start()
     {
+
+        AshSearching.clip = AshSearchingClip;
+        MonsterEnding.clip = MonsterEndingClip;
+        
+
         if (SoundSource == null)
         {
             SoundSource = gameObject.AddComponent<AudioSource>();
@@ -66,9 +74,10 @@ public class FindingKey : MonoBehaviour
         {
             time += Time.deltaTime;
         }
-        if (time >= 15f)
+        if (time >= 15f && !ashplayed)
         {
             AshSearching.Play();
+            ashplayed = true;
         }
 
         if (time >= 30f && !endingPanelLaunched)
@@ -133,6 +142,8 @@ public class FindingKey : MonoBehaviour
         Stinger.Play();
         monster.SetActive(true);
         yield return new WaitForSeconds(2f);
+        monster.SetActive(false);
+        black.SetActive(true);
 
     }
 
@@ -147,7 +158,6 @@ public class FindingKey : MonoBehaviour
             if ((name.Contains("monstre") || name.Contains("monster") || name.Contains("keys") || name.Contains("key")))
             {
                 obj.SetActive(false);
-                // Optionnel : Debug.Log("Disabled: " + obj.name);
             }
         }
     }
