@@ -62,7 +62,8 @@ public class LetterManage : MonoBehaviour
         if (!isGrabbed && grabbable.SelectingPointsCount > 0)
         {
             isGrabbed = true;
-            StartCoroutine(ReadingLetter());
+            Redreading.Play();
+            StartCoroutine(ReadingLetter(Redreading.clip.length+5f));
         }
 
         // Release grab: reset
@@ -71,20 +72,17 @@ public class LetterManage : MonoBehaviour
             isGrabbed = false;
         }
 
-       monstre.SetActive(true);
-       monstre.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 10f;
 
     }
 
-    IEnumerator ReadingLetter()
+    IEnumerator ReadingLetter(float timewait)
     {
         // Play the reading voice
-        if (Redreading != null)
-        {
-            Redreading.Play();
-            // Fade out and destroy Handgrab after reading is finished (+1s buffer)
-            StartCoroutine(FadeOutAndDestroyHandgrab(Redreading.clip.length + 1f));
-        }
+        yield return new WaitForSeconds(timewait);
+
+            //yield return new WaitForSeconds(Redreading.clip.length);
+            StartCoroutine(FadeOutAndDestroyHandgrab(5f));
+
 
         // Play the memory voice, if present
         if (Remembervoice != null)
@@ -96,11 +94,14 @@ public class LetterManage : MonoBehaviour
         {
             yield return null;
         }
+        gameObject.SetActive(false);
     }
 
     IEnumerator FadeOutAndDestroyHandgrab(float duration)
     {
-       Renderer render = gameObject.GetComponentInChildren<Renderer>();
+       //Chercher l'enfant comprenant dans le nom "single"
+       Transform letterchild = transform.Find("Red's letter single");
+       Renderer render = letterchild.GetComponent<Renderer>();
        fogPrefab.SetActive(true);
        yield return new WaitForSeconds(4f);
        render.enabled = false;
@@ -124,7 +125,6 @@ public class LetterManage : MonoBehaviour
                 }
             }
 
-      Handgrab.SetActive(false);
     }
 
     IEnumerator SpawnKeysCoroutine(int count, float radius = 1f, float minHeight = 5f, float maxHeight = 7f)

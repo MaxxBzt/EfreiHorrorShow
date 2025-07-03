@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2551121787861774109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3226954984197469325}
+  m_Layer: 0
+  m_Name: GrabPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3226954984197469325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2551121787861774109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5870791, y: 0, z: 0, w: 0.8095296}
+  m_LocalPosition: {x: 0.504, y: 0, z: -0.519}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2012259902433653507}
+  m_LocalEulerAnglesHint: {x: 71.9, y: 0, z: 0}
 --- !u!1 &3631390719156773937
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,8 +58,8 @@ Transform:
   m_GameObject: {fileID: 3631390719156773937}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.027, y: 0, z: -0.006}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: -0.197, y: 0, z: -0.006}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2012259902433653507}
@@ -870,7 +901,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 65
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4864,14 +4895,15 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.002, z: 0.1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.004, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6382663831935963776}
   - {fileID: 2073564945852036770}
   - {fileID: 7016092451881611813}
   - {fileID: 413296095137431325}
   - {fileID: 6110693934891079041}
+  - {fileID: 3226954984197469325}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &767889473213441237
@@ -4987,7 +5019,7 @@ MonoBehaviour:
   PencilClip: {fileID: 8300000, guid: 767ae9c1751d8814d87486c2a40ca976, type: 3}
   Dongclip: {fileID: 8300000, guid: 9f8a86c698069144192a25ae3b5b4904, type: 3}
   dongplayed: 0
-  Redreading: {fileID: 7679919237975919056, guid: cbfcefa5517335740bab914d9f1e1742, type: 3}
+  Redreading: {fileID: 7516591575736767929}
   Handgrab: {fileID: 8436671761418044530}
   Remembervoice: {fileID: 4358299299686937740}
   DongSound: {fileID: 8444289533007033191, guid: 9810af686782cb64c857bedaf20ba3b6, type: 3}
@@ -5226,7 +5258,7 @@ MonoBehaviour:
   _data: {fileID: 0}
   _pointableElement: {fileID: 1128910799419061187}
   _rigidbody: {fileID: 749523635585326875}
-  _grabSource: {fileID: 0}
+  _grabSource: {fileID: 3226954984197469325}
   _useClosestPointAsGrabSource: 0
   _releaseDistance: 0
   _resetGrabOnGrabsUpdated: 1
@@ -5295,6 +5327,11 @@ PrefabInstance:
 --- !u!4 &2073564945852036770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2162301460366486219, guid: cbfcefa5517335740bab914d9f1e1742, type: 3}
+  m_PrefabInstance: {fileID: 199497510556114025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &7516591575736767929 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7679919237975919056, guid: cbfcefa5517335740bab914d9f1e1742, type: 3}
   m_PrefabInstance: {fileID: 199497510556114025}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &320083982136939320
@@ -5443,6 +5480,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8ef97a4615a8b5f4887a3871161afe39, type: 3}
       propertyPath: m_Name
       value: Red's letter single
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8ef97a4615a8b5f4887a3871161afe39, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1994,7 +1994,7 @@ MonoBehaviour:
   whatwasthatdream: {fileID: 406780482}
   whatwasthatbook: {fileID: 1098100571}
   BaseballVoice: {fileID: 343224478}
-  Stinger: {fileID: 0}
+  Stinger: {fileID: 669586621}
 --- !u!4 &310777931
 Transform:
   m_ObjectHideFlags: 0
@@ -4810,7 +4810,7 @@ GameObject:
   - component: {fileID: 669586622}
   - component: {fileID: 669586621}
   m_Layer: 0
-  m_Name: BaseballVoices (1)
+  m_Name: STINGER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4826,10 +4826,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ddd8a3d1b994589448f2efe891637cdf, type: 3}
-  m_Resource: {fileID: 8300000, guid: ddd8a3d1b994589448f2efe891637cdf, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6c414fe3d0d6e1e49a66bec0c115cde6, type: 3}
+  m_Resource: {fileID: 8300000, guid: 6c414fe3d0d6e1e49a66bec0c115cde6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.492
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11102,7 +11102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1590554120
 RectTransform:
   m_ObjectHideFlags: 0
