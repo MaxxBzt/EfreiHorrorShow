@@ -199,7 +199,7 @@ public class FindingKey : MonoBehaviour
         foreach (GameObject obj in allObjects)
         {
             string name = obj.name.ToLower();
-            if ((name.Contains("monstre") || name.Contains("monster") || name.Contains("keys") || name.Contains("key")))
+            if ((name.Contains("monstre") || name.Contains("Monstre") || name.Contains("keys") || name.Contains("key")))
             {
                 obj.SetActive(false);
             }
