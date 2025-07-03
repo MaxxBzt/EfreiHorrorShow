@@ -10,6 +10,7 @@ public class IntroSequenceVR : MonoBehaviour
     [Header("Effets d'intro")]
     public GameObject blinkEffect;
     public GameObject introText;
+    public GameObject Introduction;
 
     [Header("Spawn d'objet")]
     public GameObject prefabToSpawn;
@@ -18,22 +19,22 @@ public class IntroSequenceVR : MonoBehaviour
     public float heightAboveGround = 5f;
     public float spawnRadius = .25f;
     public GameObject PanelDark;
-    public AudioClip WeirdSound;
+    public AudioSource VoiceBeginning;
     public AudioSource WeirdSoundSource;
     public GameObject Monster;
     public AudioSource whatwasthatdream;
     public AudioSource whatwasthatbook;
+    public AudioSource BaseballVoice;
+    public AudioSource Stinger;
 
     void Start()
     {
-        if (WeirdSoundSource != null && WeirdSound != null)
-        {
-            WeirdSoundSource.clip = WeirdSound;
-        }
+
         PanelDark.SetActive(true);
         blinkEffect.SetActive(false);
         introText.SetActive(false);
         Monster.SetActive(false);
+        Introduction.SetActive(false);
 
 
         StartCoroutine(PlayIntro());
@@ -41,11 +42,13 @@ public class IntroSequenceVR : MonoBehaviour
 
     IEnumerator PlayIntro()
     {
+        //Dark panel activation (vue fermée)
         PanelDark.SetActive(true);
 
-        /*TO DO : ajouter un son d'intro */
+        // son d'ambiance + voix bizarres
+        VoiceBeginning.Play();
         WeirdSoundSource.Play();
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(14f);
         Image panelImage = PanelDark.transform.GetChild(0).GetComponent<Image>();
         if (panelImage != null)
             yield return StartCoroutine(FadeOutPanel(panelImage, 3f)); // 5 secondes de fade
@@ -55,7 +58,12 @@ public class IntroSequenceVR : MonoBehaviour
         Debug.Log("PanelDark désactivé");
         //Monster appear
         Monster.SetActive(true);
-        /*TO DO : ajouter un son de monstre */
+        Stinger.Play();
+        //vérifier s'il est joué
+        if (Stinger.isPlaying)
+        {
+            Debug.Log("Stinger is playing");
+        }
         yield return new WaitForSeconds(1f);
         Monster.SetActive(false);
         
@@ -77,6 +85,8 @@ public class IntroSequenceVR : MonoBehaviour
 
         blinkEffect.SetActive(false);
 
+
+        // What was that dream ?
         introText.SetActive(true);
         whatwasthatdream.Play();
         yield return new WaitForSeconds(10f);
@@ -88,6 +98,24 @@ public class IntroSequenceVR : MonoBehaviour
         }
         yield return new WaitForSeconds(5f);
         introText.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
+
+
+        //Look around
+        Introduction.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        TMP_Text introTextComponent = Introduction.GetComponent<TMP_Text>();
+        if (introTextComponent != null)
+        {
+            yield return StartCoroutine(FadeOutText(introTextComponent, 2f));
+        }
+        yield return new WaitForSeconds(2f);
+        Introduction.SetActive(false);
+        // Baseball voice
+        BaseballVoice.Play();
+        yield return new WaitForSeconds(BaseballVoice.clip.length + 1f);
+
         SpawnObjectNearCamera();
         yield return new WaitForSeconds(2f);
         whatwasthatbook.Play();

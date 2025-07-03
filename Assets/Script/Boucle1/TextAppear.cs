@@ -15,11 +15,13 @@ public class TypewriterEffect : MonoBehaviour
     public AnimationCurve popUpCurve = AnimationCurve.EaseInOut(0, 1f, 1, 1.2f);
     public AnimationCurve popDownCurve = AnimationCurve.EaseInOut(0, 1.2f, 1, 1f);
 
-    private string fullText;
+    private string fullText = " ";
     private bool endOfText = false;
 
     private void Start()
     {
+        Debug.Log("TypewriterEffect started");
+        Debug.Log("TMP_Text component: " + tmpText.text);
         fullText = tmpText.text + " ";
         tmpText.text = "";
         tmpText.ForceMeshUpdate();
