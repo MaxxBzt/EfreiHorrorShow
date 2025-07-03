@@ -1,10 +1,26 @@
 using UnityEngine;
+using UnityEngine.UI; // Assurez-vous d'avoir cette ligne si vous utilisez des UI
+using System.Collections;
+
 
 public class FindingKey : MonoBehaviour
 {
     private LetterManage letterManage; 
     public AudioClip Soundeffect;
     public AudioSource SoundSource;
+
+    public AudioSource AshSearching;
+
+    public AudioSource MonsterEnding;
+    public AudioSource Stinger;
+
+    public GameObject monster;
+    public GameObject black;
+
+
+
+    private float time = 0f;
+
 
     void Start()
     {
@@ -13,6 +29,12 @@ public class FindingKey : MonoBehaviour
             SoundSource = gameObject.AddComponent<AudioSource>();
         }
         SoundSource.clip = Soundeffect;
+        GetComponent<SpawningMonster>().enabled = false;
+
+
+        // Désactiver les GameObjects au début
+        monster.SetActive(false);
+        black.SetActive(false);
     }
 
     void Update()
@@ -25,9 +47,32 @@ public class FindingKey : MonoBehaviour
 
         if (letterManage.dongplayed)
         {
+            time += Time.deltaTime;
             SoundSource.Play();
             StartCoroutine(HapticFeedbackRoutine());
+            //Activer le script du Spawn du monstre
+            GetComponent<SpawningMonster>().enabled = true;
+
             letterManage.dongplayed = false;
+        }
+
+        if (time >= 15f)
+        {
+            AshSearching.Play();
+        }
+
+        if (time >= 30f)
+        {
+            // Désactiver le script du Spawn du monstre
+            GetComponent<SpawningMonster>().enabled = false;
+            // Arrêter la musique de recherche
+            AshSearching.Stop();
+            // Arrêter les vibrations
+            OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+            OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+
+            StartCoroutine(ShowEndingPanel());
+
         }
     }
 
@@ -65,4 +110,18 @@ public class FindingKey : MonoBehaviour
         OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
         OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
     }
+
+    IEnumerator ShowEndingPanel()
+    {
+
+        black.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        MonsterEnding.Play();
+        yield return new WaitForSeconds(MonsterEnding.clip.length+2f);
+        monster.SetActive(true);
+        yield return new WaitForSeconds(2f);
+
+    }
+
+
 }

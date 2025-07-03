@@ -5030,6 +5030,7 @@ MonoBehaviour:
   WhatsHappening: {fileID: 3239216869920592785}
   earRinging: {fileID: 11245082818901585}
   InstructionsVoice: {fileID: 2883257770258812937}
+  playAmbiant: 0
   monsterAppear: 0
 --- !u!82 &633367637867666887
 AudioSource:
@@ -5496,11 +5497,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5752166979912669760, guid: 9810af686782cb64c857bedaf20ba3b6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 297
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5752166979912669760, guid: 9810af686782cb64c857bedaf20ba3b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 194.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5752166979912669760, guid: 9810af686782cb64c857bedaf20ba3b6, type: 3}
       propertyPath: m_LocalPosition.z
