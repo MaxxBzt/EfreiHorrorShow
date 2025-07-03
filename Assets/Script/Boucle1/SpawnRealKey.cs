@@ -7,7 +7,7 @@ public class SpawnRealkey : MonoBehaviour
     public static LayerMask environmentMask = 1 << 6;
     private static bool hasSpawned = false;
 
-    public static void Spawn(Vector3 center, float radius = 0.5f, float minHeight = 2f, float maxHeight = 3f)
+    public static void Spawn(Vector3 center, float radius = 0.5f, float minHeight = 2f, float maxHeight = 3f, int maxAttempts = 10)
     {
         if (hasSpawned)
         {
