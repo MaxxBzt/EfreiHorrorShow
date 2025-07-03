@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI; // Assurez-vous d'avoir cette ligne si vous utilisez des UI
 using System.Collections;
+using Oculus.Interaction; // Assurez-vous d'avoir cette ligne si vous utilisez Grabbable
 
 
 public class FindingKey : MonoBehaviour
@@ -18,6 +19,9 @@ public class FindingKey : MonoBehaviour
 
     public GameObject monster;
     public GameObject black;
+
+    public AudioSource RealKeySoundvoice;
+    public bool specialEndingLaunched = false;
 
 
 
@@ -92,8 +96,28 @@ public class FindingKey : MonoBehaviour
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
 
             StartCoroutine(ShowEndingPanel());
+            
 
         }
+
+
+         foreach (GameObject realKey in GameObject.FindGameObjectsWithTag("realkey"))
+        {
+            // On récupère le Grabbable (le composant qui permet le grab)
+            Grabbable grabbable = realKey.GetComponent<Grabbable>();
+            if (grabbable != null && grabbable.SelectingPointsCount > 0)
+            {
+                // La clé est attrapée !
+                specialEndingLaunched = true; // Pour ne le faire qu'une fois
+                Debug.Log("REAL KEY ATTRAPÉE !");
+
+                // → Met ici ton ending spécial, panel, sons, changement de scène, etc.
+                StartCoroutine(SpecialEndingCoroutine());
+                break; // On sort de la boucle (une seule fois)
+            }
+        }
+
+
     }
 
     private System.Collections.IEnumerator HapticFeedbackRoutine()
@@ -144,6 +168,17 @@ public class FindingKey : MonoBehaviour
         yield return new WaitForSeconds(2f);
         monster.SetActive(false);
         black.SetActive(true);
+
+    }
+
+    IEnumerator SpecialEndingCoroutine()
+    {
+        specialEndingLaunched = true; // Pour ne le faire qu'une fois
+        DisableAllMonstersAndKeys();
+        black.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        RealKeySoundvoice.Play();
+        yield return new WaitForSeconds(RealKeySoundvoice.clip.length + 2f);
 
     }
 

@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: keys
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e819267bfdf58544c9b0a6d1ada22119, type: 3}
+      propertyPath: m_TagString
+      value: realkey
+      objectReference: {fileID: 0}
     - target: {fileID: 1981825796095503621, guid: e819267bfdf58544c9b0a6d1ada22119, type: 3}
       propertyPath: m_DynamicOccludee
       value: 1
