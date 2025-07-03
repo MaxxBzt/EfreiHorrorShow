@@ -5032,6 +5032,7 @@ MonoBehaviour:
   InstructionsVoice: {fileID: 2883257770258812937}
   playAmbiant: 0
   monsterAppear: 0
+  MonsterInstructions: {fileID: 5524723087778127312, guid: b4f93fbebe23a3b489960b461be49e85, type: 3}
 --- !u!82 &633367637867666887
 AudioSource:
   m_ObjectHideFlags: 0

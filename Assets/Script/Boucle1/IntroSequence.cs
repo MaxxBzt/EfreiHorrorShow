@@ -141,7 +141,6 @@ public class IntroSequenceVR : MonoBehaviour
 
     void SpawnObjectNearCamera()
     {
-        Debug.Log("Spawn d'objet près de la caméra");
         Vector3[] directions = new Vector3[]
         {
             cameraRig.forward,

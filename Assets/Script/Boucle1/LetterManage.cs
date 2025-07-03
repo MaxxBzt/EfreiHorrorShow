@@ -33,6 +33,7 @@ public class LetterManage : MonoBehaviour
     public bool monsterAppear;
 
     private bool voicePlayed;
+    public GameObject MonsterInstructions;
 
 
     void Awake()
@@ -51,6 +52,14 @@ public class LetterManage : MonoBehaviour
 
     void Start()
     {
+
+        MonsterInstructions = Instantiate(MonsterInstructions);
+        GameObject CenterEyeAnchor = GameObject.Find("CenterEyeAnchor");
+        MonsterInstructions.transform.SetParent(CenterEyeAnchor.transform);
+        //Positionner le panneau d'instructions Vector3(0,-0.252000004,2.83699989)
+        MonsterInstructions.transform.localPosition = new Vector3(0, -0.252f, 4.837f);
+        MonsterInstructions.SetActive(false);
+
         voicePlayed = false;
         playAmbiant = false;
 
@@ -106,32 +115,26 @@ public class LetterManage : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        panel.SetActive(true);
         monsterAppear = false;
 
         yield return new WaitForSeconds(1f);
 
-        panel.SetActive(false);
         monsterAppear = true;
         
         yield return new WaitForSeconds(2f);
 
-        panel.SetActive(true);
         monsterAppear = false;
 
         yield return new WaitForSeconds(1f);
 
-        panel.SetActive(false);
         monsterAppear = true;
 
         yield return new WaitForSeconds(2f);
 
-        panel.SetActive(true);
         monsterAppear = false;
 
         yield return new WaitForSeconds(2f);
 
-        panel.SetActive(false);
         monsterAppear = false;
         playAmbiant = false;
         yield return new WaitForSeconds(2f);
@@ -145,8 +148,26 @@ public class LetterManage : MonoBehaviour
 
         //Instruction for endgame
         panel.SetActive(true);
+        MonsterInstructions.SetActive(true);
         InstructionsVoice.Play();
-        yield return new WaitForSeconds(InstructionsVoice.clip.length + 1f);
+        yield return new WaitForSeconds(4f);
+        MonsterInstructions.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        MonsterInstructions.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        MonsterInstructions.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        MonsterInstructions.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        MonsterInstructions.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        MonsterInstructions.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        MonsterInstructions.SetActive(false);
+        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(2f);
+
 
         earRinging.Play();
         StartCoroutine(PanelFlashToWhite(panel, 0.5f));
@@ -177,13 +198,6 @@ public class LetterManage : MonoBehaviour
         
         // Spawn keys after the letter is read
         StartCoroutine(SpawnKeysCoroutine(30));
-
-
-
-
-
-        
-
 
 
     }
