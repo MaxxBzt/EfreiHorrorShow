@@ -70,6 +70,11 @@ void Update()
         rend.enabled = false;
         hasPlayed = false;
     }
+    if (!letterManage.playAmbiant)
+    {
+        murmur.Stop();
+    }
+        
 }
 
 

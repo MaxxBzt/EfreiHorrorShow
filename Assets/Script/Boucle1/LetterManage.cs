@@ -18,7 +18,6 @@ public class LetterManage : MonoBehaviour
     public bool keysCalled = false;
     public AudioClip PencilClip;
 
-    public AudioClip Dongclip;
     public bool dongplayed = false;
     public AudioSource Redreading;
     public GameObject Handgrab; 
@@ -29,6 +28,7 @@ public class LetterManage : MonoBehaviour
     public AudioSource WhatsHappening;
     public AudioSource earRinging;
     public AudioSource InstructionsVoice;
+    public bool playAmbiant;
 
     public bool monsterAppear;
 
@@ -44,21 +44,17 @@ public class LetterManage : MonoBehaviour
         {
             collisionAudioSource = GetComponent<AudioSource>();
         }
-        if (DongSound == null)
-        {
-            DongSound = gameObject.AddComponent<AudioSource>();
-        }
+
     }
 
     void Start()
     {
+        playAmbiant = false;
 
         monsterAppear = false;
 
         SpawnKeys.prefab = Keys;
         SpawnRealkey.prefab = RealKeys;
-        DongSound.clip = Dongclip;
-        DongSound.playOnAwake = false;
         fogPrefab.SetActive(false); 
     }
 
@@ -90,6 +86,7 @@ public class LetterManage : MonoBehaviour
 
     IEnumerator MonstreApparition(GameObject darkness)
     {
+        playAmbiant = true;
         monsterAppear = true;
         Transform panelTransform = darkness.transform.GetChild(0);
         GameObject panel = panelTransform.gameObject;
@@ -132,7 +129,7 @@ public class LetterManage : MonoBehaviour
 
         panel.SetActive(false);
         monsterAppear = false;
-
+        playAmbiant = false;
         yield return new WaitForSeconds(2f);
 
         // Play the "What's happening?" voice
