@@ -139,6 +139,7 @@ public class LetterManage : MonoBehaviour
             yield return new WaitForSeconds(WhatsHappening.clip.length + 1f);
         }
 
+        //Instruction for endgame
         panel.SetActive(true);
         InstructionsVoice.Play();
         yield return new WaitForSeconds(InstructionsVoice.clip.length + 1f);
@@ -169,6 +170,12 @@ public class LetterManage : MonoBehaviour
 
 
         dongplayed = true;
+        
+        yield return new WaitForSeconds( 1f);
+        // Spawn keys after the letter is read
+        StartCoroutine(SpawnKeysCoroutine(30));
+
+
 
 
 
