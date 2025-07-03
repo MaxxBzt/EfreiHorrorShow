@@ -1,6 +1,7 @@
 using UnityEngine;
 using Oculus.Interaction;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LetterManage : MonoBehaviour
 {
@@ -26,8 +27,7 @@ public class LetterManage : MonoBehaviour
     public AudioSource DongSound;
     public GameObject fogPrefab; 
 
-    public GameObject monstre;
-    private GameObject monstreInstance;
+    public bool monsterAppear;
 
 
     void Awake()
@@ -50,6 +50,7 @@ public class LetterManage : MonoBehaviour
     void Start()
     {
 
+        monsterAppear = false;
 
         SpawnKeys.prefab = Keys;
         SpawnRealkey.prefab = RealKeys;
@@ -86,46 +87,53 @@ public class LetterManage : MonoBehaviour
 
     IEnumerator MonstreApparition(GameObject darkness)
     {
-        //prendre l'enfant direct de darkness
+        monsterAppear = true;
         Transform panelTransform = darkness.transform.GetChild(0);
         GameObject panel = panelTransform.gameObject;
-        monstreInstance = Instantiate(monstre, new Vector3(0, 0, 0), Quaternion.identity);
 
-        monstreInstance.SetActive(true);
+        Image img = panel.GetComponent<Image>();
+        if (img != null)
+        {
+            Color c = img.color;
+            c.a = 1f; // Opaque
+            img.color = c;
+        }
+
 
         yield return new WaitForSeconds(1f);
 
         panel.SetActive(true);
+        monsterAppear = false;
 
         yield return new WaitForSeconds(1f);
 
         panel.SetActive(false);
+        monsterAppear = true;
         
         yield return new WaitForSeconds(2f);
 
         panel.SetActive(true);
+        monsterAppear = false;
 
         yield return new WaitForSeconds(1f);
 
         panel.SetActive(false);
+        monsterAppear = true;
 
         yield return new WaitForSeconds(2f);
 
         panel.SetActive(true);
+        monsterAppear = false;
 
         yield return new WaitForSeconds(2f);
 
         panel.SetActive(false);
-         monstreInstance.SetActive(false);
+        monsterAppear = false;
 
         yield return new WaitForSeconds(2f);
 
-       
-
-
-
-
         
+
 
 
     }
@@ -144,15 +152,13 @@ public class LetterManage : MonoBehaviour
         if (Remembervoice != null)
         {
             Remembervoice.Play();
-            yield return new WaitForSeconds(Remembervoice.clip.length);
+            yield return new WaitForSeconds(Remembervoice.clip.length+1f);
         }
         else
         {
             yield return null;
         }
-        gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(2f);
 
         GameObject darkness = GameObject.Find("darkness");
         StartCoroutine(MonstreApparition(darkness));
