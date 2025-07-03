@@ -171,7 +171,6 @@ public class LetterManage : MonoBehaviour
 
         dongplayed = true;
         
-        yield return new WaitForSeconds( 1f);
         // Spawn keys after the letter is read
         StartCoroutine(SpawnKeysCoroutine(30));
 

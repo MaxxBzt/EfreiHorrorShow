@@ -22,11 +22,9 @@ public class FindingKey : MonoBehaviour
         letterManage = letterObject.GetComponent<LetterManage>();
         if (letterManage == null) return;
 
-        Debug.Log("dong bool " + letterManage.dongplayed);
 
         if (letterManage.dongplayed)
         {
-            Debug.Log("Playing sound effect for finding key.");
             SoundSource.Play();
             StartCoroutine(HapticFeedbackRoutine());
             letterManage.dongplayed = false;
