@@ -8053,7 +8053,7 @@ MonoBehaviour:
   SoundSource: {fileID: 615904455}
   AshSearchingClip: {fileID: 8300000, guid: 846a77030b00ed44abb1c88ae523976a, type: 3}
   AshSearching: {fileID: 432290440}
-  MonsterEndingClip: {fileID: 8300000, guid: c81255b7bd9a5c54381ec0866dac9a9a, type: 3}
+  MonsterEndingClip: {fileID: 8300000, guid: 73475427e6beef548b3347927b08dc1b, type: 3}
   MonsterEnding: {fileID: 1426891997}
   Stinger: {fileID: 669586621}
   monster: {fileID: 50254757}
@@ -12335,7 +12335,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942103831}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 62.47}
+  m_LocalPosition: {x: 0, y: 0, z: 106.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17414,7 +17414,7 @@ GameObject:
   - component: {fileID: 1426891998}
   - component: {fileID: 1426891997}
   m_Layer: 0
-  m_Name: MonsterKey
+  m_Name: Endingbadvoice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

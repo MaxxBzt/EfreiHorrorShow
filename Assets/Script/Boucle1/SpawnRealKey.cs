@@ -7,7 +7,7 @@ public class SpawnRealkey : MonoBehaviour
     public static LayerMask environmentMask = 1 << 6;
     private static bool hasSpawned = false;
 
-    public static void Spawn(Vector3 origin, float radius = 0.8f, float heightAbove = 5f, int maxAttempts = 10)
+    public static void Spawn(Vector3 center, float radius = 0.5f, float minHeight = 2f, float maxHeight = 3f)
     {
         if (hasSpawned)
         {
@@ -19,7 +19,7 @@ public class SpawnRealkey : MonoBehaviour
         {
             Vector2 randomCircle = Random.insideUnitCircle * radius;
             Vector3 offset = new Vector3(randomCircle.x, 0, randomCircle.y);
-            Vector3 rayOrigin = origin + offset + Vector3.up * heightAbove;
+            Vector3 rayOrigin = center + offset + Vector3.up * maxHeight;
 
             if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 10f, environmentMask))
             {
