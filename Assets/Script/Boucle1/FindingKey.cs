@@ -20,6 +20,8 @@ public class FindingKey : MonoBehaviour
 
 
     private float time = 0f;
+    public bool timeStarted = false;
+    private bool endingPanelLaunched = false;
 
 
     void Start()
@@ -35,6 +37,7 @@ public class FindingKey : MonoBehaviour
         // Désactiver les GameObjects au début
         monster.SetActive(false);
         black.SetActive(false);
+        timeStarted = false;
     }
 
     void Update()
@@ -47,7 +50,10 @@ public class FindingKey : MonoBehaviour
 
         if (letterManage.dongplayed)
         {
-            time += Time.deltaTime;
+            if (!timeStarted)
+            {
+                timeStarted = true;
+            }
             SoundSource.Play();
             StartCoroutine(HapticFeedbackRoutine());
             //Activer le script du Spawn du monstre
@@ -56,13 +62,18 @@ public class FindingKey : MonoBehaviour
             letterManage.dongplayed = false;
         }
 
+        if(timeStarted)
+        {
+            time += Time.deltaTime;
+        }
         if (time >= 15f)
         {
             AshSearching.Play();
         }
 
-        if (time >= 30f)
+        if (time >= 30f && !endingPanelLaunched)
         {
+            endingPanelLaunched = true;
             // Désactiver le script du Spawn du monstre
             GetComponent<SpawningMonster>().enabled = false;
             // Arrêter la musique de recherche
@@ -113,15 +124,34 @@ public class FindingKey : MonoBehaviour
 
     IEnumerator ShowEndingPanel()
     {
-
+        DisableAllMonstersAndKeys();
         black.SetActive(true);
         yield return new WaitForSeconds(4f);
         MonsterEnding.Play();
         yield return new WaitForSeconds(MonsterEnding.clip.length+2f);
+        black.SetActive(false);
+        Stinger.Play();
         monster.SetActive(true);
         yield return new WaitForSeconds(2f);
 
     }
+
+
+    void DisableAllMonstersAndKeys()
+    {
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            string name = obj.name.ToLower();
+            if ((name.Contains("monstre") || name.Contains("monster") || name.Contains("keys") || name.Contains("key")))
+            {
+                obj.SetActive(false);
+                // Optionnel : Debug.Log("Disabled: " + obj.name);
+            }
+        }
+    }
+
 
 
 }

@@ -32,6 +32,8 @@ public class LetterManage : MonoBehaviour
 
     public bool monsterAppear;
 
+    private bool voicePlayed;
+
 
     void Awake()
     {
@@ -49,6 +51,7 @@ public class LetterManage : MonoBehaviour
 
     void Start()
     {
+        voicePlayed = false;
         playAmbiant = false;
 
         monsterAppear = false;
@@ -63,11 +66,12 @@ public class LetterManage : MonoBehaviour
         if (grabbable == null) return;
 
         // Start grab: only trigger once per grab
-        if (!isGrabbed && grabbable.SelectingPointsCount > 0)
+        if (!isGrabbed && grabbable.SelectingPointsCount > 0 && voicePlayed==false)
         {
             isGrabbed = true;
             Redreading.Play();
             StartCoroutine(ReadingLetter(Redreading.clip.length+5f));
+            voicePlayed = true;
         }
 
         // Release grab: reset
