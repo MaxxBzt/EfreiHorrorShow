@@ -100,20 +100,29 @@ public class FindingKey : MonoBehaviour
 
         }
 
-
-         foreach (GameObject realKey in GameObject.FindGameObjectsWithTag("realkey"))
-        {
-            // On récupère le Grabbable (le composant qui permet le grab)
-            Grabbable grabbable = realKey.GetComponent<Grabbable>();
-            if (grabbable != null && grabbable.SelectingPointsCount > 0)
+        if (!specialEndingLaunched) {
+            foreach (GameObject realKey in GameObject.FindGameObjectsWithTag("realkey"))
             {
-                // La clé est attrapée !
-                specialEndingLaunched = true; // Pour ne le faire qu'une fois
-                Debug.Log("REAL KEY ATTRAPÉE !");
+                // On récupère le Grabbable (le composant qui permet le grab)
+                Grabbable grabbable = realKey.GetComponent<Grabbable>();
+                if (grabbable != null && grabbable.SelectingPointsCount > 0)
+                {
+                    time = 0f;
+                    // La clé est attrapée !
+                    specialEndingLaunched = true; // Pour ne le faire qu'une fois
+                    Debug.Log("REAL KEY ATTRAPÉE !");
 
-                // → Met ici ton ending spécial, panel, sons, changement de scène, etc.
-                StartCoroutine(SpecialEndingCoroutine());
-                break; // On sort de la boucle (une seule fois)
+                    GetComponent<SpawningMonster>().enabled = false;
+                    // Arrêter la musique de recherche
+                    AshSearching.Stop();
+                    // Arrêter les vibrations
+                    OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+                    OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+
+                    // → Met ici ton ending spécial, panel, sons, changement de scène, etc.
+                    StartCoroutine(SpecialEndingCoroutine());
+                    break; // On sort de la boucle (une seule fois)
+                }
             }
         }
 
@@ -176,7 +185,7 @@ public class FindingKey : MonoBehaviour
         specialEndingLaunched = true; // Pour ne le faire qu'une fois
         DisableAllMonstersAndKeys();
         black.SetActive(true);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
         RealKeySoundvoice.Play();
         yield return new WaitForSeconds(RealKeySoundvoice.clip.length + 2f);
 

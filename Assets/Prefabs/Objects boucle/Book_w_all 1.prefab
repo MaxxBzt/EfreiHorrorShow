@@ -5804,11 +5804,11 @@ PrefabInstance:
     - target: {fileID: 9080913249728749659, guid: 1574264154a1d224c95f6b390196dd39, type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: ec2a13decebbbff45ba7474e105559dc, type: 3}
+      objectReference: {fileID: 8300000, guid: 58f3a0167d9388d4b8880796523f02aa, type: 3}
     - target: {fileID: 9080913249728749659, guid: 1574264154a1d224c95f6b390196dd39, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: ec2a13decebbbff45ba7474e105559dc, type: 3}
+      objectReference: {fileID: 8300000, guid: 58f3a0167d9388d4b8880796523f02aa, type: 3}
     - target: {fileID: 9080913249728749659, guid: 1574264154a1d224c95f6b390196dd39, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
