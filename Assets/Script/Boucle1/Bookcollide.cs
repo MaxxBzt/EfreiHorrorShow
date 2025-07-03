@@ -21,9 +21,15 @@ public class PlaySoundOnCollision : MonoBehaviour
     private bool isGrabbed = false;
     private bool voiceplayed = false;
 
+    public GameObject fogPrefab;
+
     void Start()
     {
         SpawnLetter.prefab = letterPrefab;
+        if (fogPrefab != null)
+        {
+            fogPrefab.SetActive(false); // Assure que le brouillard est désactivé au départ
+        }
     }
 
     void Awake()
@@ -84,10 +90,37 @@ public class PlaySoundOnCollision : MonoBehaviour
         {
             AshePanickedVoice.Play();
         }
-        yield return new WaitForSeconds(AshePanickedVoice.clip.length + 1f);
+        yield return new WaitForSeconds(AshePanickedVoice.clip.length + 3f);
 
         // Vector3 origin = transform.position;  // <- inutile ici
         SpawnLetter.Spawn(Camera.main.transform.position, 0.5f); // 0.5m autour de la caméra
+
+        fogPrefab.SetActive(true);
+       yield return new WaitForSeconds(1f);
+
+       // decrease gently the rate over time of the fog until 0
+         if (fogPrefab != null)
+            {
+                ParticleSystem ps = fogPrefab.GetComponent<ParticleSystem>();
+                if (ps != null)
+                {
+                    var emission = ps.emission;
+                    float startRate = emission.rateOverTime.constant;
+                    float t = 0f;
+                    while (t < 3f)
+                    {
+                        float newRate = Mathf.Lerp(startRate, 0f, t / 3f);
+                        emission.rateOverTime = newRate;
+                        t += Time.deltaTime;
+                        yield return null;
+                    }
+                    emission.rateOverTime = 0f; // Assure que c'est à 0 à la fin
+                }
+            }
+
+            yield return new WaitForSeconds(2f);
+
+            Destroy(gameObject); // Détruire l'objet après la collision et le son
     }
 
 

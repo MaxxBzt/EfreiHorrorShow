@@ -25,7 +25,7 @@ public class OrbitAndLookAtCamera : MonoBehaviour
 void Update()
 {
     // Toujours tourner, même si la lettre n'existe pas encore !
-    if (cameraTransform == null)
+    if (cameraTransform == null) 
         return;
 
     currentAngle += orbitSpeed * Time.deltaTime;
@@ -40,8 +40,6 @@ void Update()
 
     transform.position = cameraTransform.position + offset;
     transform.LookAt(cameraTransform.position);
-
-    Debug.Log("lettre"+letterManage);
 
     // Gérer la lettre ensuite...
     if (letterManage == null)

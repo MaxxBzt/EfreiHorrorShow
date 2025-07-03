@@ -26,6 +26,9 @@ public class LetterManage : MonoBehaviour
 
     public AudioSource DongSound;
     public GameObject fogPrefab; 
+    public AudioSource WhatsHappening;
+    public AudioSource earRinging;
+    public AudioSource InstructionsVoice;
 
     public bool monsterAppear;
 
@@ -132,10 +135,72 @@ public class LetterManage : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        // Play the "What's happening?" voice
+        if (WhatsHappening != null)
+        {
+            WhatsHappening.Play();
+            yield return new WaitForSeconds(WhatsHappening.clip.length + 1f);
+        }
+
+        panel.SetActive(true);
+        InstructionsVoice.Play();
+        yield return new WaitForSeconds(InstructionsVoice.clip.length + 1f);
+
+        earRinging.Play();
+        StartCoroutine(PanelFlashToWhite(panel, 0.5f));
+
+        yield return new WaitForSeconds(1f);
+
+        // Fade out the panel
+        float elapsed = 0f;
+        Color startColor = img.color;
+        Color endColor = startColor;
+        endColor.a = 0f;
+
+        while (elapsed < 2f)
+        {
+            img.color = Color.Lerp(startColor, endColor, elapsed / 2f);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        img.color = endColor;
+        img.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+        DongSound.Play();
+
+
+        dongplayed = true;
+
+
+
         
 
 
 
+    }
+
+
+    // Appelle cette coroutine pour flasher le panel !
+    IEnumerator PanelFlashToWhite(GameObject panel, float flashDuration = 0.3f)
+    {
+        Image img = panel.GetComponent<Image>();
+        if (img == null) yield break;
+
+        Color startColor = Color.black;
+        Color endColor = Color.white;
+        float t = 0f;
+
+        img.color = startColor; // Commence noir
+
+        while (t < flashDuration)
+        {
+            t += Time.deltaTime;
+            img.color = Color.Lerp(startColor, endColor, t / flashDuration);
+            yield return null;
+        }
+        img.color = endColor; // Assure bien blanc à la fin
     }
 
 
@@ -219,34 +284,13 @@ public class LetterManage : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
-        string otherName = collision.gameObject.name.ToLower();
-
-        bool isNotGrabbed = grabbable == null || grabbable.SelectingPointsCount == 0;
-
-        if (isNotGrabbed && (
-            otherName.Contains("wall") ||
-            otherName.Contains("floor") ||
-            otherName.Contains("table")
-        ) && collisionAudioSource != null)
-        {
-            collisionCount++;
-
-            // Play Dong only once if collisionCount == 2
-            if (collisionCount == 2 && !dongplayed && DongSound != null)
-            {
-                Debug.Log(collisionCount + " HEYTURSZERDTFYYUGUH");
-                collisionAudioSource.clip = Dongclip;
-                dongplayed = true;
-            }
-            else
-            {
-                collisionAudioSource.clip = PencilClip;
-            }
+        if(collisionCount <1){
             collisionAudioSource.Play();
-            hasCollided = true;
-            collisionTime = Time.time;
+            collisionCount++;
         }
     }
 }
+
+
