@@ -4,7 +4,7 @@ using System.Collections;
 
 public class LightGateTrigger : MonoBehaviour
 {
-    public string nextSceneName = "NextScene";
+    public string nextSceneName = "Boucle2";
 
     [Header("Fade Settings")]
     public CanvasGroup instructionCanvas; 
@@ -12,11 +12,27 @@ public class LightGateTrigger : MonoBehaviour
 
     private bool hasEntered = false;
 
+    void Start()
+    {
+        // Lance la coroutine d'attente de 10 secondes
+        StartCoroutine(AutoNextSceneAfterDelay(10f));
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (hasEntered) return;
 
         if (other.CompareTag("MainCamera") || other.CompareTag("Player"))
+        {
+            hasEntered = true;
+            StartCoroutine(FadeThenLoad());
+        }
+    }
+
+    IEnumerator AutoNextSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (!hasEntered)
         {
             hasEntered = true;
             StartCoroutine(FadeThenLoad());
@@ -42,6 +58,6 @@ public class LightGateTrigger : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // Changement de scène
-        SceneManager.LoadScene(nextSceneName);
+        SceneManager.LoadScene("Boucle2");
     }
 }
