@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SpawnMonster : MonoBehaviour
 {
+    public string nextSceneName = "Boucle1";
     public GameObject monstrePrefab;   
     public float spawnDelay = 30f;  
     public float spawnDistance = 2f;    
@@ -45,6 +46,14 @@ public class SpawnMonster : MonoBehaviour
         {
             audio.clip = monsterLine;
             audio.Play();
+            StartCoroutine(WaitForAudioThenTransition(audio.clip.length));
         }
+    }
+
+    IEnumerator WaitForAudioThenTransition(float audioDuration)
+    {
+        yield return new WaitForSeconds(audioDuration); // attendre que la voix se termine
+        yield return new WaitForSeconds(4f);             // + 4s de pause
+        SceneManager.LoadScene(nextSceneName);           // changement de scène
     }
 }

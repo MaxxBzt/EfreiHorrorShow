@@ -22,6 +22,8 @@ public class PlaySoundOnCollision : MonoBehaviour
     private bool voiceplayed = false;
 
     public GameObject fogPrefab;
+    private GameObject AmbiantSource;
+    private AudioSource Ambiant;
 
     void Start()
     {
@@ -30,6 +32,8 @@ public class PlaySoundOnCollision : MonoBehaviour
         {
             fogPrefab.SetActive(false); // Assure que le brouillard est désactivé au départ
         }
+        AmbiantSource = GameObject.Find("AmbiantSound");
+        Ambiant = AmbiantSource.GetComponent<AudioSource>();
     }
 
     void Awake()
@@ -94,6 +98,7 @@ public class PlaySoundOnCollision : MonoBehaviour
 
         // Vector3 origin = transform.position;  // <- inutile ici
         SpawnLetter.Spawn(Camera.main.transform.position, 0.5f); // 0.5m autour de la caméra
+        Ambiant.volume = 0.3f; // On remet le son ambiant à 30%
 
         fogPrefab.SetActive(true);
        yield return new WaitForSeconds(1f);

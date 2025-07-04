@@ -27,6 +27,8 @@ public class IntroSequenceVR : MonoBehaviour
     public AudioSource BaseballVoice;
     public AudioSource Stinger;
 
+    public AudioSource Ambiant;
+
     void Start()
     {
 
@@ -141,6 +143,7 @@ public class IntroSequenceVR : MonoBehaviour
 
     void SpawnObjectNearCamera()
     {
+
         Vector3[] directions = new Vector3[]
         {
             cameraRig.forward,
@@ -177,6 +180,7 @@ public class IntroSequenceVR : MonoBehaviour
                 {
                     Vector3 spawnPos = hit.point + Vector3.up * verticalOffset;
                     Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+                    Ambiant.volume = 0f;
                     return;
                 }
             }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameStartMenu : MonoBehaviour
 {
@@ -9,27 +8,37 @@ public class GameStartMenu : MonoBehaviour
     public GameObject mainMenu;
     public GameObject about;
 
-    [Header("Main Menu Buttons")]
-    public Button startButton;
-    public Button aboutButton;
-    public Button quitButton;
-
-    public List<Button> returnButtons;
-
-    // Start is called before the first frame update
     void Start()
     {
         EnableMainMenu();
+    }
 
-        //Hook events
-        startButton.onClick.AddListener(StartGame);
-        aboutButton.onClick.AddListener(EnableAbout);
-        quitButton.onClick.AddListener(QuitGame);
-
-        foreach (var item in returnButtons)
+    void Update()
+    {
+        // --- Start game (A on right controller)
+        if (OVRInput.GetDown(OVRInput.Button.One))
         {
-            item.onClick.AddListener(EnableMainMenu);
+            StartGame();
         }
+
+        // --- Option menu (B on right controller)
+        if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            EnableAbout();
+        }
+
+        // --- About (X on left controller)
+        if (OVRInput.GetDown(OVRInput.Button.Three))
+        {
+            QuitGame();
+        }
+
+        // --- Quit game (Y on left controller OR Menu button)
+        if (OVRInput.GetDown(OVRInput.Button.Four) || OVRInput.GetDown(OVRInput.Button.Start))
+        {
+            EnableMainMenu();
+        }
+
     }
 
     public void QuitGame()
@@ -41,7 +50,7 @@ public class GameStartMenu : MonoBehaviour
     {
         HideAll();
         SceneTransitionManager.singleton.StartCoroutine(
-        SceneTransitionManager.singleton.LoadSceneRoutine(7)
+        SceneTransitionManager.singleton.LoadSceneRoutine(2)
         );
 
     }
@@ -49,6 +58,7 @@ public class GameStartMenu : MonoBehaviour
     public void HideAll()
     {
         mainMenu.SetActive(false);
+
         about.SetActive(false);
     }
 
@@ -57,11 +67,9 @@ public class GameStartMenu : MonoBehaviour
         mainMenu.SetActive(true);
         about.SetActive(false);
     }
-    public void EnableOption()
-    {
-        mainMenu.SetActive(false);
-        about.SetActive(false);
-    }
+
+
+
     public void EnableAbout()
     {
         mainMenu.SetActive(false);

@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI; // Assurez-vous d'avoir cette ligne si vous utilisez des UI
 using System.Collections;
 using Oculus.Interaction; // Assurez-vous d'avoir cette ligne si vous utilisez Grabbable
+using TMPro; // Nécessaire pour TMP_Text
+using UnityEngine.SceneManagement; // Nécessaire pour la gestion des scènes
+
 
 
 public class FindingKey : MonoBehaviour
@@ -178,6 +181,9 @@ public class FindingKey : MonoBehaviour
         monster.SetActive(false);
         black.SetActive(true);
 
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Boucle2"); // Assurez-vous que le numéro de scène est correct
+
     }
 
     IEnumerator SpecialEndingCoroutine()
@@ -188,6 +194,8 @@ public class FindingKey : MonoBehaviour
         yield return new WaitForSeconds(1f);
         RealKeySoundvoice.Play();
         yield return new WaitForSeconds(RealKeySoundvoice.clip.length + 2f);
+
+        SceneManager.LoadScene("Midway Scene"); // Assurez-vous que le numéro de scène est correct
 
     }
 

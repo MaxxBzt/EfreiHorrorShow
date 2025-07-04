@@ -5796,9 +5796,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2349c47eb3143259c56d69f2e84a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monstrePrefab: {fileID: 3784345301162037131, guid: 70d28e46ecec145508faaecab07fed43, type: 3}
+  monstrePrefab: {fileID: 5524723087778127312, guid: b4f93fbebe23a3b489960b461be49e85, type: 3}
   spawnDelay: 30
-  spawnDistance: 2
+  spawnDistance: 5
   monsterLine: {fileID: 8300000, guid: fcfdee23691ec4a1981645869342b779, type: 3}
 --- !u!114 &868542841
 MonoBehaviour:
