@@ -10,6 +10,8 @@ public class OneGrabBook : MonoBehaviour
     public AudioSource CloseBookAudioSource;
     public AudioSource Ashvoice1;
     public AudioSource Ashvoice2;
+    private bool hasPlayedOnce = false;
+
 
     public OVRInput.Controller controller = OVRInput.Controller.RTouch; // Ajuste selon ton besoin
 
@@ -41,28 +43,37 @@ public class OneGrabBook : MonoBehaviour
     private Coroutine voiceCoroutine;
 
     private void OnPointerEvent(PointerEvent evt)
+{
+    if (evt.Type == PointerEventType.Select)
     {
-        if (evt.Type == PointerEventType.Select)
+        // Toujours ouvrir le livre visuellement !
+        if (coverAnimation != null)
+            coverAnimation.SetTrigger("OpenBook");
+
+        // Les sons + coroutine, uniquement la première fois
+        if (!hasPlayedOnce)
         {
             if (grabAudioSource != null)
                 grabAudioSource.Play();
-            if (coverAnimation != null)
-                coverAnimation.SetTrigger("OpenBook");
 
             if (voiceCoroutine != null) StopCoroutine(voiceCoroutine);
             voiceCoroutine = StartCoroutine(VoiceAndHapticSequence());
-        }
-        else if (evt.Type == PointerEventType.Unselect)
-        {
-            if (coverAnimation != null)
-                coverAnimation.SetTrigger("CloseBook");
-            if (CloseBookAudioSource != null)
-                CloseBookAudioSource.Play();
 
-            if (voiceCoroutine != null) StopCoroutine(voiceCoroutine);
-            OVRInput.SetControllerVibration(0, 0, controller);
+            hasPlayedOnce = true; // Bloque la séquence
         }
     }
+    else if (evt.Type == PointerEventType.Unselect)
+    {
+        if (coverAnimation != null)
+            coverAnimation.SetTrigger("CloseBook");
+        if (CloseBookAudioSource != null)
+            CloseBookAudioSource.Play();
+
+        if (voiceCoroutine != null) StopCoroutine(voiceCoroutine);
+        OVRInput.SetControllerVibration(0, 0, controller);
+    }
+}
+
 
     private IEnumerator VoiceAndHapticSequence()
     {

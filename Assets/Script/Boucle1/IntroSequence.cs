@@ -153,7 +153,7 @@ public class IntroSequenceVR : MonoBehaviour
         };
 
         LayerMask environmentMask = 1 << 6;// Layer 6 = Environnement
-        float maxRaycastDistance = 10f;
+        float maxRaycastDistance = 5f;
         int maxAttempts = 15;
         float verticalOffset = 0.05f;
 

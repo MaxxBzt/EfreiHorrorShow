@@ -75,12 +75,18 @@ public class PlaySoundOnCollision : MonoBehaviour
             otherName.Contains("table")
         ) && collisionAudioSource != null)
         {
-            collisionCount++;
-            collisionAudioSource.Play();
-            hasCollided = true;
-            collisionTime = Time.time;
+            // Ajout : vérifie le délai
+            if (Time.time - collisionTime >= 2f || collisionCount == 0)
+            {
+                collisionCount++;
+                collisionAudioSource.Play();
+                hasCollided = true;
+                collisionTime = Time.time;
+            }
+            // Sinon : ignore la collision
         }
     }
+
 
     IEnumerator PlayVoiceAndSpawn()
     {
