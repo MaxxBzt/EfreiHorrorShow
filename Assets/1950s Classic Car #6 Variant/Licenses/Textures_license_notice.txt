@@ -1,0 +1,5 @@
+Copyright (C) 2025, Empty Room Games
+
+The textures (bodymap_TEXTURE.png, interiorred_TEXTURE.png, interiorblue_TEXTURE.png, interiorbrown_TEXTURE.png, interior_NRM.png, interior_METAL.png, grill_TEXTURE.png, grill_NRM.png, trimmings_NRM.png, holes_TEXTURE.png, squarelight_TEXTURE.png, squarelight_NRM.png, headlight_TEXTURE.png, headlight_NRM.png, tyre_NRM.png, tyre_TEXTURE.png,  undercarriage_TEXTURE.png, undercarriage_NRM.png, underchrome_TEXTURE.png, underchrome_NRM.png, windows_TEXTURE.png, shadow_TEXTURE.png, numberplate_TEXTURE.png, numberplate_NRM.png, undercarriagelod_NRM.png, undercarriagelod_TEXTURE.png) was created in Blender by me (TheKnightsKing)
+
+Please refer to the Unity Asset Store Terms of Service and EULA

@@ -6,9 +6,43 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/IntroScene.unity
+    guid: 21787546abaad1c4fac8e64a5892afdb
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 8c0333ad79ceb4fb1a566caa893d2511
+  - enabled: 1
+    path: Assets/Scenes/MainMenu_StartScene.unity
+    guid: 3f0bd13c678c148de82f7832f54c8f66
+  - enabled: 1
+    path: "Assets/Scenes/Cin\xE9matique/S\xE9quence0.unity"
+    guid: d30a57e4af1cd41c0a627d4aa10f97ac
+  - enabled: 1
+    path: "Assets/Scenes/Cin\xE9matique/Seq1.unity"
+    guid: 42fa4072cf98a9b4aaa9b41fad4307c1
+  - enabled: 1
+    path: "Assets/Scenes/Cin\xE9matique/Seq2.unity"
+    guid: d9b84cc3986164054ba93a243f633e44
+  - enabled: 1
+    path: "Assets/Scenes/Cin\xE9matique/Seq3.unity"
+    guid: 70b879e53564b4f7b9cca913a31b4894
+  - enabled: 1
+    path: "Assets/Scenes/Cin\xE9matique/Real Seq 4.unity"
+    guid: 233e7a7dcc5f343ba97b20285d01641d
+  - enabled: 1
+    path: Assets/Scenes/Boucle1.unity
+    guid: f6868d2d198534eaa8ab7450647486fc
+  - enabled: 1
+    path: Assets/Scenes/Boucle2.unity
+    guid: a02cd5bade707014b81fd72354c6bce6
+  - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: d137862e6d6bd40cbb01d75a30dd43d9
+  - enabled: 1
+    path: "Assets/Scenes/Cin\xE9matique/Midway Scene.unity"
+    guid: 2ec7c5117fe7c49e880ae52530460fa1
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: cb7bf2f3f7410e3468fce40016abc1d6, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 34a768ad34842f3419054392f01a6493, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: dd4ee5113f5ee334e9c08ffe4539a3e1, type: 2}
