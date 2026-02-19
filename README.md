@@ -23,13 +23,13 @@
   - [Deployment](#deployment)  
 - [Credit/Acknowledgment](#creditacknowledgment)
 
-## About
+## A Propos
 
 Le projet EFREI Horror Show s'attaque à la fois aux défis technologiques et sociétaux. Il montre comment la réalité augmentée peut aller au-delà du divertissement pour explorer des sujets sensibles comme la santé mentale, les traumatismes et la mémoire. 
 
 Contrairement à une expérience VR classique saturée d'action, notre approche repose sur une narration profonde et une horreur psychologique subtile sans jumpscares visuels. Actuellement sous forme de Proof of Concept (POC) comprenant l'introduction et la première boucle temporelle, le scénario s'adapte à l'environnement du joueur grâce à la technologie Passthrough. Le jeu cible les joueurs axés sur la narration à la recherche d'une expérience riche et immersive sur les plateformes AR.
 
-## Usage
+## Utilisation
 
 L'application est destinée à être utilisée avec un casque de réalité mixte (Meta Quest 3 ou Quest 3S) en configuration PCVR via l'éditeur Unity. 
 
@@ -42,7 +42,7 @@ Le projet étant un prototype fonctionnel sans build `.apk` ou `.exe` pré-gén�
 3. **Ouverture** : Lancez le projet via Unity Hub.
 4. **Lancement** : Connectez votre casque au PC (Câble Link ou Air Link), ouvrez la scène principale et cliquez sur le bouton "Play" dans l'éditeur.
 
-### Commands
+### Commandes
 
 L'expérience privilégie un gameplay "Zéro locomotion", conçu pour être joué assis ou debout sur place sans déplacement physique nécessaire.
 
@@ -50,22 +50,22 @@ L'expérience privilégie un gameplay "Zéro locomotion", conçu pour être jou�
 - **Interaction** : Gâchette d'index (Trigger) pour valider ou interagir avec les éléments narratifs.
 - **Déplacement** : Déplacement physique limité à votre zone de jeu (Room Scale) pour observer les éléments superposés à votre pièce.
 
-## Development
+## Développement
 
 Cette section explique comment configurer l'environnement pour développer sur le projet.
 
-### Pre-Requisites
+### Pré-requis
 
 - Unity Hub.
 - Unity Editor version **6000.0.48f1**.
 - Meta XR All-in-One SDK (incluant les Building Blocks pour le Passthrough).
 - Meta Quest 3 ou 3S raccordé au PC.
 
-### Development Environment
+### Environnement de développement
 
 1. **Clonage du projet** :
    ```bash
-   $ git clone [https://github.com/MaxxBzt/EfreiHorrorShow/](https://github.com/MaxxBzt/EfreiHorrorShow/)
+   $ git clone https://github.com/MaxxBzt/EfreiHorrorShow/
    ```
 2. Configuration Unity :
 3. Ouvrez Unity Hub et ajoutez le dossier du projet. Assurez-vous d'utiliser impérativement la version 6000.0.48f1 pour éviter de casser les dépendances du SDK Meta.
@@ -77,12 +77,13 @@ Bien que le projet s'exécute actuellement en Play Mode, la procédure standard 
 - Sélectionnez la plateforme Android (pour un déploiement natif sur Quest) et cliquez sur `Switch Platform`.
 - Cliquez sur Build pour générer un fichier `.apk.`
 
-### Deployment
+### Déploiement
 Le déploiement pour des tests internes ou des démonstrations (comme les JPO) peut se faire en direct via le bouton "Build and Run" ou en exécutant simplement le projet dans l'éditeur avec le casque branché.
 
 Lancement de la Scène :
 Ouvrez la scène principale d'introduction. Assurez-vous que les fonctionnalités Passthrough et Scene Mesh sont bien actives dans les paramètres de l'OVRCameraRig.
-### Credit/Acknowledgment
+
+### Crédits
 Le projet a été réalisé par l'équipe suivante:
 - [Maxime Bézot](https://github.com/MaxxBzt/): Chef de Projet
 - [Audrey Damiba](https://github.com/audie17) : Responsable Documentation & Recherche Utilisateur 
